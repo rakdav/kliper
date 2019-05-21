@@ -54,7 +54,7 @@ public class SuperActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_super);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        BottomNavigationView navView = findViewById(R.id.navigation);
         fragmentManager=getSupportFragmentManager();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.container,new HomeFragment());
@@ -62,6 +62,7 @@ public class SuperActivity extends AppCompatActivity {
         fragmentTransaction.commit();
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        setTitle("Клипер");
     }
 
 

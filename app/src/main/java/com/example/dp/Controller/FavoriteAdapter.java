@@ -71,7 +71,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
                 context.startActivity(intent);
             }
         });
-       // viewHolder.comment.setText(house.getDescription());
+       viewHolder.comment.setText(house.getComment());
     }
 
     @Override
@@ -136,7 +136,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
             price=(TextView)itemView.findViewById(R.id.price);
             price.setTypeface(tf);
             image=(ImageView)itemView.findViewById(R.id.image);
-            comment=itemView.findViewById(R.id.comment);
+            comment=itemView.findViewById(R.id.comm);
             cv=itemView.findViewById(R.id.cv);
         }
 

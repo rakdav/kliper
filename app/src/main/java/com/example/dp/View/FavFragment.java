@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -68,6 +69,7 @@ public class FavFragment extends Fragment {
     private TextView Lat;
     private Button update;
     private Button delete;
+    private EditText comment;
 
     private static final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
 
@@ -115,6 +117,8 @@ public class FavFragment extends Fragment {
         phnBtn=(ImageButton) v.findViewById(R.id.imageButton2);
 
         image=v.findViewById(R.id.pictureHouse);
+        comment=v.findViewById(R.id.comment);
+        comment.setText(house.getComment());
         Picasso.get().load(house.getPicture_path()).into(image);
         Retrofit retrofit=new Retrofit.Builder().baseUrl(APIUrl.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         APIService service=retrofit.create(APIService.class);
@@ -184,9 +188,9 @@ public class FavFragment extends Fragment {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                house.setComment(comment.getText().toString());
                 class UpdateHouse extends AsyncTask<Void,Void,Void>
                 {
-
                     @Override
                     protected Void doInBackground(Void... voids) {
                         HouseDao houseDao = db.houseDao();
@@ -229,10 +233,6 @@ public class FavFragment extends Fragment {
         Lat.setText(house.getLatitude());
         Lng = (TextView) v.findViewById(R.id.Lng);
         Lng.setText(house.getLongitude());
-
-
-
-
         return v;
     }
 }
