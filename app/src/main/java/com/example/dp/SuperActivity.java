@@ -24,6 +24,10 @@ import java.util.ArrayList;
 public class SuperActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private ActionBar toolbar;
+    private MenuItem ItemClear;
+    private MenuItem ItemMap;
+    private boolean Map;
+    private boolean Find;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -36,18 +40,27 @@ public class SuperActivity extends AppCompatActivity {
                     fragmentTransaction.replace(R.id.container,new HomeFragment());
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
+                    Find=false;
+                    Map=true;
                     toolbar.setTitle("Клипер");
+                    invalidateOptionsMenu();
                     break;
                 case R.id.navigation_dashboard:
                     fragmentTransaction.replace(R.id.container,new SearchFragment());
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
                     toolbar.setTitle("Поиск");
+                    Map=false;
+                    Find=true;
+                    invalidateOptionsMenu();
                     break;
                 case R.id.navigation_notifications:
                     fragmentTransaction.replace(R.id.container,new FavoriteFragment());
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
+                    Map=true;
+                    Find=true;
+                    invalidateOptionsMenu();
                     toolbar.setTitle("Избранное");
                     break;
             }
@@ -68,18 +81,18 @@ public class SuperActivity extends AppCompatActivity {
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         toolbar = getSupportActionBar();
         toolbar.setTitle("Клипер");
+        Map=true;
     }
-
-
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.main_menu, menu);
+        ItemClear=menu.findItem(R.id.action_clear);
+        ItemMap=menu.findItem(R.id.action_mapall);
+        if(Map) ItemClear.setVisible(false);
+        if(Find) ItemMap.setVisible(false);
         return true;
     }
-
-
-
 
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -87,8 +100,6 @@ public class SuperActivity extends AppCompatActivity {
             case R.id.action_tools :
 
                 return true;
-
-
         }
         return super.onOptionsItemSelected(item);
     }
