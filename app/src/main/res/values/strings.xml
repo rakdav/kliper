@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Клипер</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dep">Квартиры</string>
+    <string name="dom">Дом</string>
+    <string name="ofis">Офис</string>
+    <string name="kv1">1 Комнатные</string>
+    <string name="kv2">2 Комнатные</string>
+    <string name="kv3">3 Комнатные</string>
+    <string name="kv4">4 Комнатные</string>
+    <string name="kv5">5 Комнатные</string>
+    <string name="other">Другие</string>
+    <string name="land">Участок</string>
+    <string name="price">Стоимость :</string>
+    <string name="mkv">М/КВ</string>
+    <string name="rooms">Комнат</string>
+    <string name="floor">Этаж</string>
+    <string name="typen">Тип недвижимости:</string>
+    <string name="typezd">Тип сделки:</string>
+    <string name="floorr">Этаж:</string>
+    <string name="area">Район:</string>
+    <string name="cities">Города</string>
+    <string name="citych">Выберите город</string>
+    <string name="rub">руб</string>
+
+    <string-array name="entries">
+        <item>Калининград</item>
+        <item>Зеленоградск</item>
+        <item>Светлогорск</item>
+    </string-array>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="tipo">Введите тип недвижимости</string>
+
+</resources>
