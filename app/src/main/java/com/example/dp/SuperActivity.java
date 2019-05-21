@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.view.Menu;
@@ -22,28 +23,32 @@ import java.util.ArrayList;
 
 public class SuperActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
-
+    private ActionBar toolbar;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment fragment=null;
             FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    fragment=new HomeFragment();
-                    fragmentTransaction.replace(R.id.container,new HomeFragment()).commit();
+                    fragmentTransaction.replace(R.id.container,new HomeFragment());
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                    toolbar.setTitle("Клипер");
                     break;
-
                 case R.id.navigation_dashboard:
-                    fragment=new SearchFragment();
-                    fragmentTransaction.replace(R.id.container,new SearchFragment()).commit();
+                    fragmentTransaction.replace(R.id.container,new SearchFragment());
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                    toolbar.setTitle("Поиск");
                     break;
                 case R.id.navigation_notifications:
-                    fragment=new FavoriteFragment();
-                    fragmentTransaction.replace(R.id.container,new FavoriteFragment()).commit();
+                    fragmentTransaction.replace(R.id.container,new FavoriteFragment());
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                    toolbar.setTitle("Избранное");
                     break;
             }
             return true;
@@ -61,8 +66,8 @@ public class SuperActivity extends AppCompatActivity {
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        setTitle("Клипер");
+        toolbar = getSupportActionBar();
+        toolbar.setTitle("Клипер");
     }
 
 
@@ -70,9 +75,7 @@ public class SuperActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.main_menu, menu);
-
         return true;
-
     }
 
 
@@ -82,8 +85,7 @@ public class SuperActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch(id){
             case R.id.action_tools :
-                Intent intent=new Intent(this,SettingsActivity.class);
-                startActivity(intent);
+
                 return true;
 
 

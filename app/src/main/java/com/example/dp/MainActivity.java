@@ -75,8 +75,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         int id = item.getItemId();
         switch(id){
             case R.id.action_tools :
-                Intent intent=new Intent(this,SettingsActivity.class);
-                startActivity(intent);
+
                 return true;
 
 
