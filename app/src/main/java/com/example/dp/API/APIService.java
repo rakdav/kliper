@@ -14,10 +14,10 @@ public interface APIService
     Call<HouseList> getUsers();
     @GET("estate/info?key=6d35e1f591aa413189aa34cd93dc26fb")
     Call<Home> getData(@Query("id") int id);
-
     @GET("agent/info?key=6d35e1f591aa413189aa34cd93dc26fb")
     Call<Agent> getAgent(@Query("id") int id);
-
+    @GET("agent/all?key=6d35e1f591aa413189aa34cd93dc26fb")
+    Call<Agent> getAgents();
 }
 
 
