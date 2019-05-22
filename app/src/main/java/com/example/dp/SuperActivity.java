@@ -1,8 +1,10 @@
 package com.example.dp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -12,6 +14,7 @@ import android.support.annotation.NonNull;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.dp.Model.House;
 import com.example.dp.View.FavoriteFragment;
@@ -26,12 +29,15 @@ public class SuperActivity extends AppCompatActivity {
     private ActionBar toolbar;
     private MenuItem ItemClear;
     private MenuItem ItemMap;
+    private FloatingActionButton fabSearch;
+    private FloatingActionButton fabReturn;
     private boolean Map;
     private boolean Find;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
+        @SuppressLint("RestrictedApi")
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
@@ -44,16 +50,19 @@ public class SuperActivity extends AppCompatActivity {
                     Map=true;
                     toolbar.setTitle("Клипер");
                     invalidateOptionsMenu();
+                    fabReturn.setVisibility(View.INVISIBLE);
+                    fabSearch.setVisibility(View.VISIBLE);
                     break;
-                case R.id.navigation_dashboard:
-                    fragmentTransaction.replace(R.id.container,new SearchFragment());
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
-                    toolbar.setTitle("Поиск");
-                    Map=false;
-                    Find=true;
-                    invalidateOptionsMenu();
-                    break;
+//                case R.id.navigation_dashboard:
+//                    fragmentTransaction.replace(R.id.container,new SearchFragment());
+//                    fragmentTransaction.addToBackStack(null);
+//                    fragmentTransaction.commit();
+//                    toolbar.setTitle("Поиск");
+//                    Map=false;
+//                    Find=true;
+//                    invalidateOptionsMenu();
+//                    fabReturn.setVisibility(View.VISIBLE);
+//                    break;
                 case R.id.navigation_notifications:
                     fragmentTransaction.replace(R.id.container,new FavoriteFragment());
                     fragmentTransaction.addToBackStack(null);
@@ -62,12 +71,15 @@ public class SuperActivity extends AppCompatActivity {
                     Find=true;
                     invalidateOptionsMenu();
                     toolbar.setTitle("Избранное");
+                    fabReturn.setVisibility(View.INVISIBLE);
+                    fabSearch.setVisibility(View.INVISIBLE);
                     break;
             }
             return true;
         }
     };
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +94,43 @@ public class SuperActivity extends AppCompatActivity {
         toolbar = getSupportActionBar();
         toolbar.setTitle("Клипер");
         Map=true;
+        fabReturn = (FloatingActionButton) findViewById(R.id.floatingActionButton3);
+        fabReturn.setVisibility(View.INVISIBLE);
+        fabReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container,new HomeFragment());
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                fabReturn.setVisibility(View.INVISIBLE);
+                fabSearch.setVisibility(View.VISIBLE);
+                Find=false;
+                Map=true;
+                toolbar.setTitle("Клипер");
+                invalidateOptionsMenu();
+            }
+        });
+
+
+        fabSearch = (FloatingActionButton) findViewById(R.id.fabSearch);
+        fabSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container,new SearchFragment());
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                fabReturn.setVisibility(View.VISIBLE);
+                fabSearch.setVisibility(View.INVISIBLE);
+                toolbar.setTitle("Поиск");
+                Map=false;
+                Find=true;
+                invalidateOptionsMenu();
+            }
+        });
+
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
