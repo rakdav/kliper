@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -33,7 +34,6 @@ public class HomeFragment extends Fragment {
     private HouseAdapter adapter;
     private RecyclerView rv;
     private ArrayList<House> houses;
-    SearchView searchView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -63,9 +63,9 @@ public class HomeFragment extends Fragment {
 
             }
         });
-
         return v;
     }
+
     private void Update(ArrayList<House> h)
     {
         adapter=null;

@@ -2,10 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/navigation_glavn"
+        android:icon="@drawable/ic_info_black_24dp"
+        android:title="Главная" />
+
+
+    <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_black_24dp"
         android:title="Предложения" />
-
 
 
     <item
