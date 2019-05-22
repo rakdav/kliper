@@ -34,7 +34,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView rv;
     private ArrayList<House> houses;
     SearchView searchView;
-private Button button;
+
     public HomeFragment() {
         // Required empty public constructor
     }
