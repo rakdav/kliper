@@ -1,6 +1,8 @@
 package com.example.dp;
 
 import android.annotation.SuppressLint;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
@@ -15,16 +17,18 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 
 import com.example.dp.Model.House;
 import com.example.dp.View.FavoriteFragment;
 import com.example.dp.View.HomeFragment;
+import com.example.dp.View.InfoFragment;
 import com.example.dp.View.SearchFragment;
 
 import java.util.ArrayList;
 
 
-public class SuperActivity extends AppCompatActivity {
+public class SuperActivity extends AppCompatActivity  {
     private FragmentManager fragmentManager;
     private ActionBar toolbar;
     private MenuItem ItemClear;
@@ -33,6 +37,7 @@ public class SuperActivity extends AppCompatActivity {
     private FloatingActionButton fabReturn;
     private boolean Map;
     private boolean Find;
+    SearchView searchView;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -53,16 +58,17 @@ public class SuperActivity extends AppCompatActivity {
                     fabReturn.setVisibility(View.INVISIBLE);
                     fabSearch.setVisibility(View.VISIBLE);
                     break;
-//                case R.id.navigation_dashboard:
-//                    fragmentTransaction.replace(R.id.container,new SearchFragment());
-//                    fragmentTransaction.addToBackStack(null);
-//                    fragmentTransaction.commit();
-//                    toolbar.setTitle("Поиск");
-//                    Map=false;
-//                    Find=true;
-//                    invalidateOptionsMenu();
-//                    fabReturn.setVisibility(View.VISIBLE);
-//                    break;
+                case R.id.navigation_glavn:
+                    fragmentTransaction.replace(R.id.container,new InfoFragment());
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                    toolbar.setTitle("Клипер");
+                    Map=false;
+                    Find=true;
+                    invalidateOptionsMenu();
+                    fabReturn.setVisibility(View.INVISIBLE);
+                    fabSearch.setVisibility(View.INVISIBLE);
+                    break;
                 case R.id.navigation_notifications:
                     fragmentTransaction.replace(R.id.container,new FavoriteFragment());
                     fragmentTransaction.addToBackStack(null);
@@ -140,6 +146,9 @@ public class SuperActivity extends AppCompatActivity {
         ItemMap=menu.findItem(R.id.action_mapall);
         if(Map) ItemClear.setVisible(false);
         if(Find) ItemMap.setVisible(false);
+
+
+
         return true;
     }
 
@@ -152,6 +161,5 @@ public class SuperActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 }
