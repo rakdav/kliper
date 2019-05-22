@@ -9,6 +9,7 @@ import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.dp.API.APIService;
 import com.example.dp.API.APIUrl;
@@ -33,7 +34,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView rv;
     private ArrayList<House> houses;
     SearchView searchView;
-
+private Button button;
     public HomeFragment() {
         // Required empty public constructor
     }
