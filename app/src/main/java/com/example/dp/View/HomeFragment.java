@@ -88,119 +88,125 @@ public class HomeFragment extends Fragment {
         boolean prodaza=prefs.getBoolean("q1",false);
         //город
         String town = prefs.getString("city",null);
+        //boolean townn = prefs.getBoolean("city",false);
 
-
-
-        //тип недвижимости
-        if(ofice!=false||kvart!=false||houss!=false||land!=false) {
-            ArrayList<House> temp = new ArrayList<House>();
-            if (kvart)
-            {
-                for (House h : houses)
-                {
-                    if (h.getType() != null && h.getType().equals("квартира")) temp.add(h);
-                }
-            }
-            if (ofice)
-            {
-                for (House h : houses) {
-                    if (h.getType() != null && h.getType().equals("офисные помещения")||h.getType().equals("офис")) temp.add(h);
-                }
-            }
-            if (houss) {
-                for (House h : houses) {
-                    if (h.getType() != null && h.getType().equals("дом в городской черте")||h.getType().equals("таунхаус")||h.getType().equals("дом")) temp.add(h);
-                }
-            }
-            if (land) {
-                for (House h : houses) {
-                    if (h.getType() != null && h.getType().equals("участок в городской черте")||h.getType().equals("участок")) temp.add(h);
-                }
-            }
+           if(h1==false&&h2==false&&h3==false&&h4==false&&h5==false&&ofice==false&&kvart==false&&houss==false&&land==false&&arenda==false&&prodaza==false&&town.contains("false"))
+           {
+               Update(houses);
+           }
+           else
+           {
+               //тип недвижимости
+               if(houses.size() !=0) {
+                   ArrayList<House> temp = new ArrayList<House>();
+                   if (kvart)
+                   {
+                       for (House h : houses)
+                       {
+                           if (h.getType() != null && h.getType().equals("квартира")) temp.add(h);
+                       }
+                   }
+                   if (ofice)
+                   {
+                       for (House h : houses) {
+                           if (h.getType() != null && h.getType().equals("офисные помещения")||h.getType().equals("офис")) temp.add(h);
+                       }
+                   }
+                   if (houss) {
+                       for (House h : houses) {
+                           if (h.getType() != null && h.getType().equals("дом в городской черте")||h.getType().equals("таунхаус")||h.getType().equals("дом")) temp.add(h);
+                       }
+                   }
+                   if (land) {
+                       for (House h : houses) {
+                           if (h.getType() != null && h.getType().equals("участок в городской черте")||h.getType().equals("участок")) temp.add(h);
+                       }
+                   }
+                   if(ofice==false&&kvart==false&&houss==false&&land==false)
+                   {
+                       temp=houses;
+                   }
 ///////////////колво комнат
 
-            if(temp.size() !=0 && h1!=false||h2!=false||h3!=false||h4!=false||h5!=false) {
-                ArrayList<House> t1 = new ArrayList<>();
-                if (h1) {
-                    for (House h : temp) {
-                        if (h.getRooms() != null && h.getRooms().equals("1")) t1.add(h);
-                    }
-                }
-                if (h2) {
-                   for (House h : temp) {
-                        if (h.getRooms() != null && h.getRooms().equals("2")) t1.add(h);
-                        }
-                    }
-                if (h3) {
-                    for (House h : temp) {
-                        if (h.getRooms() != null && h.getRooms().equals("3")) t1.add(h);
-                        }
-                    }
-                if (h4) {
-                    for (House h : temp) {
-                        if (h.getRooms() != null && h.getRooms().equals("4")) t1.add(h);
-                        }
-                    }
-                if (h5) {
-                    for (House h : temp) {
-                        if (h.getRooms() != null && h.getRooms().equals("5")) t1.add(h);
-                        }
-                    }
-                //////////////тип сделки
+                   if(temp.size() !=0) {
+                       ArrayList<House> t1 = new ArrayList<>();
+                       if (h1) {
+                           for (House h : temp) {
+                               if (h.getRooms() != null && h.getRooms().equals("1")) t1.add(h);
+                           }
+                       }
+                       if (h2) {
+                           for (House h : temp) {
+                               if (h.getRooms() != null && h.getRooms().equals("2")) t1.add(h);
+                           }
+                       }
+                       if (h3) {
+                           for (House h : temp) {
+                               if (h.getRooms() != null && h.getRooms().equals("3")) t1.add(h);
+                           }
+                       }
+                       if (h4) {
+                           for (House h : temp) {
+                               if (h.getRooms() != null && h.getRooms().equals("4")) t1.add(h);
+                           }
+                       }
+                       if (h5) {
+                           for (House h : temp) {
+                               if (h.getRooms() != null && h.getRooms().equals("5")) t1.add(h);
+                           }
+                       }
+                       if(h1==false&&h2==false&&h3==false&&h4==false&&h5==false)
+                       {
+                           t1=temp;
+                       }
+                       //////////////тип сделки
 
-                if (t1.size() !=0 && arenda!=false||prodaza!=false){
-                    ArrayList<House> t2 = new ArrayList<>();
-                    if (arenda) {
-                        for (House h : t1) {
-                            if ( h.getDeal()!= null && h.getDeal().equals("аренда")) t2.add(h);
-                        }
-                    }
-                    if (prodaza) {
-                        for (House h : t1) {
-                            if (h.getDeal() != null && h.getDeal().equals("продажа")) t2.add(h);
-                        }
-                    }
-                    //выбор города
-                    if(t2.size()!=0){
-                        ArrayList<House> t3 = new ArrayList<>();
-                        if (town.contains("Калининград")){
-                            for (House h : t2) {
-                                if ( h.getCity_title()!= null && h.getCity_title().equals("Калининград")) t3.add(h);
-                            }
+                       if (t1.size() !=0){
+                           ArrayList<House> t2 = new ArrayList<>();
+                           if (arenda) {
+                               for (House h : t1) {
+                                   if ( h.getDeal()!= null && h.getDeal().equals("аренда")) t2.add(h);
+                               }
+                           }
+                           if (prodaza) {
+                               for (House h : t1) {
+                                   if (h.getDeal() != null && h.getDeal().equals("продажа")) t2.add(h);
+                               }
+                           }
+                           if(arenda==false&&prodaza==false)
+                           {
+                               t2=t1;
+                           }
+                           //выбор города
+                           if(t2.size()!=0){
+                               ArrayList<House> t3 = new ArrayList<>();
+                               if (town.contains("Калининград")){
+                                   for (House h : t2) {
+                                       if ( h.getCity_title()!= null && h.getCity_title().equals("Калининград")) t3.add(h);
+                                   }
 
-                        }
-                        if (town.contains("Светлогорск")){
-                            for (House h : t2) {
-                                if ( h.getCity_title()!= null && h.getCity_title().equals("светлогорск")) t3.add(h);
-                            }
+                               }
+                               if (town.contains("Светлогорск")){
+                                   for (House h : t2) {
+                                       if ( h.getCity_title()!= null && h.getCity_title().equals("Cветлогорск")) t3.add(h);
+                                   }
 
-                        }
-                        if (town.contains("Зеленоградск")){
-                            for (House h : t2) {
-                                if ( h.getCity_title()!= null && h.getCity_title().equals("Зеленоградск")) t3.add(h);
-                            }
-
-                        }
-                        Update(t3);
-                    }
-                    else {
-                        Update(t2);
-                    }
-                }
-
-                else {
-                    Update(t1);
-                 }
-                }
-
-                else {
-                    Update(temp);
-                }
-        }
-        else
-        {
-            Update(houses);
-        }
+                               }
+                               if (town.contains("Зеленоградск")){
+                                   for (House h : t2) {
+                                       if ( h.getCity_title()!= null && h.getCity_title().equals("Зеленоградск")) t3.add(h);
+                                   }
+                               }
+                               if(town.contains("false"))
+                               {
+                                   t3=t2;
+                               }
+                               Update(t3);
+                           }
+                       }
+                   }
+               }
+           }
     }
 
 
