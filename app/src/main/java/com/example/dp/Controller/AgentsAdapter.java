@@ -10,12 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
-
 import com.example.dp.Model.Agent;
-import com.example.dp.Model.House;
 import com.example.dp.R;
-
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
