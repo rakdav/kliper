@@ -26,8 +26,6 @@ public class AgentsFragment extends Fragment {
     public AgentsFragment() {
         // Required empty public constructor
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -35,6 +33,7 @@ public class AgentsFragment extends Fragment {
         View v=inflater.inflate(R.layout.fragment_agents, container, false);
         rv=v.findViewById(R.id.rv1);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapter=new AgentsAdapter(agents,agents,getContext());
         rv.setAdapter(adapter);
         return v;
     }
