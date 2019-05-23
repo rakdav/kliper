@@ -1,16 +1,15 @@
 package com.example.dp.View;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.dp.API.APIService;
 import com.example.dp.API.APIUrl;
@@ -18,6 +17,7 @@ import com.example.dp.Controller.HouseAdapter;
 import com.example.dp.Model.House;
 import com.example.dp.Model.HouseList;
 import com.example.dp.R;
+import com.example.dp.SettingsActivity;
 
 import java.util.ArrayList;
 
@@ -65,6 +65,100 @@ public class HomeFragment extends Fragment {
         });
         return v;
     }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(getActivity());
+        //комнаты
+        boolean h1=prefs.getBoolean("h1",false);
+        boolean h2=prefs.getBoolean("h2",false);
+        boolean h3=prefs.getBoolean("h3",false);
+        boolean h4=prefs.getBoolean("h4",false);
+        boolean h5=prefs.getBoolean("h5",false);
+        //тип недвижки
+        boolean ofice=prefs.getBoolean("ofiss",false);
+        boolean kvart=prefs.getBoolean("kvart",false);
+        boolean houss=prefs.getBoolean("house",false);
+        boolean land=prefs.getBoolean("ground",false);
+
+        if(ofice!=false||kvart!=false||houss!=false||land!=false) {
+            ArrayList<House> temp = new ArrayList<House>();
+            if (kvart)
+            {
+                for (House h : houses)
+                {
+                    if (h.getType() != null && h.getType().equals("квартира")) temp.add(h);
+                }
+            }
+            if (ofice)
+            {
+                for (House h : houses) {
+                    if (h.getType() != null && h.getType().equals("офисные помещения")||h.getType().equals("офис")) temp.add(h);
+                }
+            }
+            if (houss) {
+                for (House h : houses) {
+                    if (h.getType() != null && h.getType().equals("дом в городской черте")||h.getType().equals("таунхаус")||h.getType().equals("дом")) temp.add(h);
+                }
+            }
+            if (land) {
+                for (House h : houses) {
+                    if (h.getType() != null && h.getType().equals("участок в городской черте")||h.getType().equals("участок")) temp.add(h);
+                }
+            }
+
+
+            if(temp.size() !=0 && h1!=false||h2!=false||h3!=false||h4!=false||h5!=false) {
+                ArrayList<House> t1 = new ArrayList<>();
+                if (h1) {
+                    for (House h : temp) {
+                        if (h.getRooms() != null && h.getRooms().equals("1")) t1.add(h);
+                    }
+                }
+                if (h2) {
+                   for (House h : temp) {
+                        if (h.getRooms() != null && h.getRooms().equals("2")) t1.add(h);
+                        }
+                    }
+                if (h3) {
+                    for (House h : temp) {
+                        if (h.getRooms() != null && h.getRooms().equals("3")) t1.add(h);
+                        }
+                    }
+                if (h4) {
+                    for (House h : temp) {
+                        if (h.getRooms() != null && h.getRooms().equals("4")) t1.add(h);
+                        }
+                    }
+                if (h5) {
+                    for (House h : temp) {
+                        if (h.getRooms() != null && h.getRooms().equals("5")) t1.add(h);
+                        }
+                    }
+
+                if (t1.size() !=0){
+
+                }
+
+
+                    Update(t1);
+                }
+                else {
+                    Update(temp);
+                }
+        }
+        else
+        {
+            Update(houses);
+        }
+    }
+
+
+
+
+
 
     private void Update(ArrayList<House> h)
     {

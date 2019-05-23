@@ -51,14 +51,13 @@ public class SuperActivity extends AppCompatActivity  {
                     fragmentTransaction.replace(R.id.container,new HomeFragment());
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
-                    Find=false;
                     Map=true;
+                    Find=true;
                     toolbar.setTitle("Клипер");
                     invalidateOptionsMenu();
-                    fabReturn.setVisibility(View.INVISIBLE);
                     fabSearch.setVisibility(View.VISIBLE);
                     break;
-                case R.id.navigation_glavn:
+                case R.id.navigation_main:
                     fragmentTransaction.replace(R.id.container,new InfoFragment());
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
@@ -66,7 +65,6 @@ public class SuperActivity extends AppCompatActivity  {
                     Map=false;
                     Find=true;
                     invalidateOptionsMenu();
-                    fabReturn.setVisibility(View.INVISIBLE);
                     fabSearch.setVisibility(View.INVISIBLE);
                     break;
                 case R.id.navigation_notifications:
@@ -77,7 +75,6 @@ public class SuperActivity extends AppCompatActivity  {
                     Find=true;
                     invalidateOptionsMenu();
                     toolbar.setTitle("Избранное");
-                    fabReturn.setVisibility(View.INVISIBLE);
                     fabSearch.setVisibility(View.INVISIBLE);
                     break;
             }
@@ -93,50 +90,22 @@ public class SuperActivity extends AppCompatActivity  {
         BottomNavigationView navView = findViewById(R.id.navigation);
         fragmentManager=getSupportFragmentManager();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.container,new HomeFragment());
+        fragmentTransaction.add(R.id.container,new InfoFragment());
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         toolbar = getSupportActionBar();
         toolbar.setTitle("Клипер");
         Map=true;
-        fabReturn = (FloatingActionButton) findViewById(R.id.floatingActionButton3);
-        fabReturn.setVisibility(View.INVISIBLE);
-        fabReturn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container,new HomeFragment());
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-                fabReturn.setVisibility(View.INVISIBLE);
-                fabSearch.setVisibility(View.VISIBLE);
-                Find=false;
-                Map=true;
-                toolbar.setTitle("Клипер");
-                invalidateOptionsMenu();
-            }
-        });
-
-
         fabSearch = (FloatingActionButton) findViewById(R.id.fabSearch);
+        fabSearch.setVisibility(View.INVISIBLE);
         fabSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container,new SearchFragment());
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-                fabReturn.setVisibility(View.VISIBLE);
-                fabSearch.setVisibility(View.INVISIBLE);
-                toolbar.setTitle("Поиск");
-                Map=false;
-                Find=true;
-                invalidateOptionsMenu();
+                Intent intent=new Intent(SuperActivity.this,SettingsActivity.class);
+                startActivity(intent);
             }
         });
-
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -146,20 +115,7 @@ public class SuperActivity extends AppCompatActivity  {
         ItemMap=menu.findItem(R.id.action_mapall);
         if(Map) ItemClear.setVisible(false);
         if(Find) ItemMap.setVisible(false);
-
-
-
         return true;
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch(id){
-            case R.id.action_tools :
-
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
 }
