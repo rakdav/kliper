@@ -63,15 +63,14 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 PreferenceManager.getDefaultSharedPreferences(getBaseContext()).edit().clear().apply();
-                restartActivity();
                 return false;
             }
         });
 
         ItemMap = menu.findItem(R.id.action_mapall);
         ItemMap.setVisible(false);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        searchItem.setVisible(false);
+//        MenuItem searchItem = menu.findItem(R.id.action_search);
+//        searchItem.setVisible(false);
         return true;
     }
 

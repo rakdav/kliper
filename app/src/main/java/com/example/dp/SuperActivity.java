@@ -34,10 +34,8 @@ public class SuperActivity extends AppCompatActivity  {
     private MenuItem ItemClear;
     private MenuItem ItemMap;
     private FloatingActionButton fabSearch;
-    private FloatingActionButton fabReturn;
     private boolean Map;
     private boolean Find;
-    SearchView searchView;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -53,7 +51,7 @@ public class SuperActivity extends AppCompatActivity  {
                     fragmentTransaction.commit();
                     Map=true;
                     Find=true;
-                    toolbar.setTitle("Клипер");
+                    toolbar.setTitle("Поиск");
                     invalidateOptionsMenu();
                     fabSearch.setVisibility(View.VISIBLE);
                     break;

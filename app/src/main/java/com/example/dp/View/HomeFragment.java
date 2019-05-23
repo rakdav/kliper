@@ -87,7 +87,7 @@ public class HomeFragment extends Fragment {
         String town = prefs.getString("city",null);
         //boolean townn = prefs.getBoolean("city",false);
 
-           if(h1==false&&h2==false&&h3==false&&h4==false&&h5==false&&ofice==false&&kvart==false&&houss==false&&land==false&&arenda==false&&prodaza==false&&town.contains("false"))
+           if(h1==false&&h2==false&&h3==false&&h4==false&&h5==false&&ofice==false&&kvart==false&&houss==false&&land==false&&arenda==false&&prodaza==false&&town==null)
            {
                Update(houses);
            }
