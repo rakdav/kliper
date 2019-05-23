@@ -26,7 +26,6 @@ public class AgentsAdapter extends RecyclerView.Adapter<AgentsAdapter.ViewHolder
     private List<Agent> agentsFilter;
     private Context context;
     private Typeface tf;
-    private static final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
 
     public AgentsAdapter(List<Agent> agents, List<Agent> agentsFilter, Context context) {
         this.agents = agents;
