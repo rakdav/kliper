@@ -19,6 +19,25 @@
             android:title="Аренда" />
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="Тип недвижимости">
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="kvart"
+            android:title="@string/dep" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="house"
+            android:title="@string/dom" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="ground"
+            android:title="@string/land" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="ofiss"
+            android:title="@string/ofis" />
+    </PreferenceCategory>
     <PreferenceCategory android:title="@string/dep">
         <CheckBoxPreference
             android:defaultValue="false"
@@ -40,26 +59,6 @@
             android:defaultValue="false"
             android:key="h5"
             android:title="@string/kv5" />
-    </PreferenceCategory>
-
-    <PreferenceCategory android:title="Тип недвижимости">
-
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="kvart"
-            android:title="@string/dep" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="house"
-            android:title="@string/dom" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="ground"
-            android:title="@string/land" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="ofiss"
-            android:title="@string/ofis" />
     </PreferenceCategory>
 
 
