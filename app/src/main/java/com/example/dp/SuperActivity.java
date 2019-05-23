@@ -102,15 +102,8 @@ public class SuperActivity extends AppCompatActivity  {
         fabSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container,new SearchFragment());
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-                fabSearch.setVisibility(View.INVISIBLE);
-                toolbar.setTitle("Поиск");
-                Map=false;
-                Find=true;
-                invalidateOptionsMenu();
+                Intent intent=new Intent(SuperActivity.this,SettingsActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -123,16 +116,6 @@ public class SuperActivity extends AppCompatActivity  {
         if(Map) ItemClear.setVisible(false);
         if(Find) ItemMap.setVisible(false);
         return true;
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch(id){
-            case R.id.action_tools :
-
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
 }

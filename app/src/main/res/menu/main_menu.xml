@@ -4,9 +4,13 @@
 
 
     <item
-        android:id="@+id/action_tools"
-        android:title="Наши агенты"
-         />
+        android:id="@+id/action_search"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="always|collapseActionView"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        android:title="Search"/>
+
+
     <item
         android:id="@+id/action_mapall"
         android:title="На карте"
@@ -16,9 +20,5 @@
         android:id="@+id/action_clear"
         android:title="Очистить"
         app:showAsAction="always"
-        />
-    <item
-        android:id="@+id/action_about"
-        android:title="О нас"
         />
 </menu>

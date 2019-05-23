@@ -1,5 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:defaultValue="false"
+        android:entries="@array/entries"
+        android:entryValues="@array/entries"
+        android:key="city"
+        android:summary="@string/citych"
+        android:title="@string/cities" />
+
+    <PreferenceCategory android:title="Тип сделки">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="q1"
+            android:title="Продажа" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="q2"
+            android:title="Аренда" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/dep">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="h1"
+            android:title="@string/kv1" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="h2"
+            android:title="@string/kv2" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="h3"
+            android:title="@string/kv3" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="h4"
+            android:title="@string/kv4" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="h5"
+            android:title="@string/kv5" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Тип недвижимости">
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="kvart"
+            android:title="@string/dep" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="house"
+            android:title="@string/dom" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="ground"
+            android:title="@string/land" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="ofiss"
+            android:title="@string/ofis" />
+    </PreferenceCategory>
 
 
 </PreferenceScreen>

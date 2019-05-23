@@ -74,9 +74,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch(id){
-            case R.id.action_tools :
-
-                return true;
+//            case R.id.action_tools :
+//
+//                return true;
 
 
         }
