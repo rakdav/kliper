@@ -83,7 +83,7 @@ public class HomeFragment extends Fragment {
         boolean houss=prefs.getBoolean("house",false);
         boolean land=prefs.getBoolean("ground",false);
 
-        if(h1!=false||h2!=false||h3!=false||h4!=false||h5!=false||ofice!=false||kvart!=false||houss!=false||land!=false) {
+        if(ofice!=false||kvart!=false||houss!=false||land!=false) {
             ArrayList<House> temp = new ArrayList<House>();
             if (kvart)
             {
@@ -108,65 +108,53 @@ public class HomeFragment extends Fragment {
                     if (h.getType() != null && h.getType().equals("участок в городской черте")||h.getType().equals("участок")) temp.add(h);
                 }
             }
-            ArrayList<House> t1=new ArrayList<>();
-            if (h1) {
-                for (House h : temp) {
-                    if (h.getRooms() != null && h.getRooms().equals("1")) t1.add(h);
+
+
+            if(temp.size() !=0 && h1!=false||h2!=false||h3!=false||h4!=false||h5!=false) {
+                ArrayList<House> t1 = new ArrayList<>();
+                if (h1) {
+                    for (House h : temp) {
+                        if (h.getRooms() != null && h.getRooms().equals("1")) t1.add(h);
+                    }
                 }
-//            if (h1) {
-//                for (House h : houses) {
-//                    if (h.getRooms() != null && h.getRooms().equals("1")) temp.add(h);
-//                }
-//                // Update(temp);
-//            }
-//            if (h2) {
-//                for (House h : houses) {
-//                    if (h.getRooms() != null && h.getRooms().equals("2")) temp.add(h);
-//                }
-//            }
-//            if (h3) {
-//                for (House h : houses) {
-//                    if (h.getRooms() != null && h.getRooms().equals("3")) temp.add(h);
-//                }
-//            }
-//            if (h4) {
-//                for (House h : houses) {
-//                    if (h.getRooms() != null && h.getRooms().equals("4")) temp.add(h);
-//                }
-//            }
-//            if (h5) {
-//                for (House h : houses) {
-//                    if (h.getRooms() != null && h.getRooms().equals("5")) temp.add(h);
-//                }
-//            }
-//            if (ofice) {
-//                for (House h : houses) {
-//                    if (h.getType() != null && h.getType().equals("офисные помещения")||h.getType().equals("офис")) temp.add(h);
-//                }
-//            }
-//            if (kvart) {
-//                for (House h : houses) {
-//                    if (h.getType() != null && h.getType().equals("квартира")) temp.add(h);
-//                }
-//            }
-//            if (houss) {
-//                for (House h : houses) {
-//                    if (h.getType() != null && h.getType().equals("дом в городской черте")||h.getType().equals("таунхаус")||h.getType().equals("дом")) temp.add(h);
-//                }
-//            }
-//            if (land) {
-//                for (House h : houses) {
-//                    if (h.getType() != null && h.getType().equals("участок в городской черте")||h.getType().equals("участок")) temp.add(h);
-//                }
-//            }
-            }
-            Update(temp);
+                if (h2) {
+                   for (House h : temp) {
+                        if (h.getRooms() != null && h.getRooms().equals("2")) t1.add(h);
+                        }
+                    }
+                if (h3) {
+                    for (House h : temp) {
+                        if (h.getRooms() != null && h.getRooms().equals("3")) t1.add(h);
+                        }
+                    }
+                if (h4) {
+                    for (House h : temp) {
+                        if (h.getRooms() != null && h.getRooms().equals("4")) t1.add(h);
+                        }
+                    }
+                if (h5) {
+                    for (House h : temp) {
+                        if (h.getRooms() != null && h.getRooms().equals("5")) t1.add(h);
+                        }
+                    }
+
+                if (t1.size() !=0){
+
+                }
+
+
+                    Update(t1);
+                }
+                else {
+                    Update(temp);
+                }
         }
         else
         {
             Update(houses);
         }
     }
+
 
 
 
