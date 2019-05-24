@@ -34,8 +34,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment{
-    private HouseAdapter adapter;
     private RecyclerView rv;
+    private HouseAdapter adapter;
     private ArrayList<House> houses;
     SearchView searchView;
 

@@ -19,14 +19,23 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.dp.API.APIService;
+import com.example.dp.API.APIUrl;
 import com.example.dp.Controller.HouseAdapter;
 import com.example.dp.Model.House;
+import com.example.dp.Model.HouseList;
 import com.example.dp.View.FavoriteFragment;
 import com.example.dp.View.HomeFragment;
 import com.example.dp.View.InfoFragment;
 import com.example.dp.View.SearchFragment;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class SuperActivity extends AppCompatActivity {
@@ -38,6 +47,7 @@ public class SuperActivity extends AppCompatActivity {
     private boolean Map;
     private boolean Find;
     private boolean Sear;
+    private ArrayList<House> houses;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -112,6 +122,28 @@ public class SuperActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
+        Retrofit retrofit=new Retrofit.Builder().baseUrl(APIUrl.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        APIService service=retrofit.create(APIService.class);
+        houses=new ArrayList<>();
+        Call<HouseList> call=service.getUsers();
+        call.enqueue(new Callback<HouseList>() {
+            @Override
+            public void onResponse(Call<HouseList> call, Response<HouseList> response) {
+                houses=response.body().getHouses();
+            }
+
+            @Override
+            public void onFailure(Call<HouseList> call, Throwable t) {
+
+            }
+        });
+
+
+
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -130,6 +162,7 @@ public class SuperActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 Intent intent=new Intent(SuperActivity.this,MapsActivity2.class);
+                intent.putExtra("houss", houses);
                 startActivity(intent);
                 return false;
             }
