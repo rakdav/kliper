@@ -36,7 +36,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        mMap.setMinZoomPreference(12);
         mMap.setIndoorEnabled(true);
 
         UiSettings uiSettings = mMap.getUiSettings();
@@ -51,6 +50,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         double Lngg= Double.valueOf(Lng);
         LatLng posit = new LatLng(Latt,Lngg);
         mMap.addMarker(new MarkerOptions().position(posit).title(Title));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(posit));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(posit,12));
     }
 }
