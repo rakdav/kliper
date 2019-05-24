@@ -1,6 +1,7 @@
 package com.example.dp.API;
 
 import com.example.dp.Model.Agent;
+import com.example.dp.Model.AgentsList;
 import com.example.dp.Model.Home;
 import com.example.dp.Model.HouseList;
 
@@ -19,7 +20,7 @@ public interface APIService
     @GET("agent/info?key=6d35e1f591aa413189aa34cd93dc26fb")
     Call<Agent> getAgent(@Query("id") int id);
     @GET("agent/all?key=6d35e1f591aa413189aa34cd93dc26fb")
-    Call<List<Agent>> getAgents();
+    Call<AgentsList> getAgents();
 }
 
 

@@ -60,8 +60,9 @@ public class SuperActivity extends AppCompatActivity  {
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
                     toolbar.setTitle("Клипер");
-                    Map=false;
-                    Find=true;
+                    Map=true;
+                    Find=false;
+                    ItemClear.setVisible(false);
                     invalidateOptionsMenu();
                     fabSearch.setVisibility(View.INVISIBLE);
                     break;

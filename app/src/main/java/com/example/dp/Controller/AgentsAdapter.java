@@ -16,16 +16,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class AgentsAdapter extends RecyclerView.Adapter<AgentsAdapter.ViewHolder> implements Filterable
+public class AgentsAdapter extends RecyclerView.Adapter<AgentsAdapter.ViewHolder>
 {
     private List<Agent> agents;
-    private List<Agent> agentsFilter;
     private Context context;
     private Typeface tf;
 
-    public AgentsAdapter(List<Agent> agents, List<Agent> agentsFilter, Context context) {
+    public AgentsAdapter(List<Agent> agents, Context context) {
         this.agents = agents;
-        this.agentsFilter = agentsFilter;
         this.context = context;
     }
     public List<Agent> getAgents()
@@ -43,7 +41,7 @@ public class AgentsAdapter extends RecyclerView.Adapter<AgentsAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        final Agent agent = agentsFilter.get(i);
+        final Agent agent = agents.get(i);
         viewHolder.name.setText(agent.getName());
         viewHolder.position.setText(agent.getPosition());
         viewHolder.group_name.setText(agent.getGroupName());
@@ -55,42 +53,9 @@ public class AgentsAdapter extends RecyclerView.Adapter<AgentsAdapter.ViewHolder
     @Override
     public int getItemCount() {
 
-        return agentsFilter.size();
+        return agents.size();
     }
 
-    @Override
-    public Filter getFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                String charString = constraint.toString();
-                if (charString.isEmpty()) {
-                    agentsFilter = agents;
-                } else {
-                    ArrayList<Agent> filteredList = new ArrayList<>();
-                    for (Agent row : agents) {
-                        if (row.getName().indexOf(charString) != -1)
-                        //if (row.getName().contains(charString))
-                        {
-                            filteredList.add(row);
-                        }
-                    }
-
-                    agentsFilter = filteredList;
-                }
-
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = agentsFilter;
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                agentsFilter = (ArrayList<Agent>) results.values;
-                notifyDataSetChanged();
-            }
-        };
-    }
 
     class ViewHolder extends RecyclerView.ViewHolder
     {
