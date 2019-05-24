@@ -35,5 +35,6 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="tipo">Введите тип недвижимости</string>
+    <string name="title_activity_maps2">Map</string>
 
 </resources>
