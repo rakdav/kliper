@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +62,7 @@ public class HouseFragment extends Fragment {
     private TextView Lng;
     private TextView Lat;
     private Button FawBtn;
+    private RecyclerView rv;
 
     private static final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
 
@@ -106,6 +108,7 @@ public class HouseFragment extends Fragment {
         Discr = (TextView) v.findViewById(R.id.opis);
         Discr.setText(house.getDescription());
         phnBtn=(ImageButton) v.findViewById(R.id.imageButton2);
+        rv=(RecyclerView)v.findViewById(R.id.rv2);
 
         image=v.findViewById(R.id.pictureHouse);
         Picasso.get().load(house.getPicture_path()).into(image);

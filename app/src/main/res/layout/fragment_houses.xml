@@ -66,10 +66,17 @@
                     android:textAlignment="textStart"
                     android:textSize="18sp" />
 
+
             </LinearLayout>
         </LinearLayout>
 
-
+<android.support.v7.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+    android:id="@+id/rv2">
+</android.support.v7.widget.RecyclerView>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
