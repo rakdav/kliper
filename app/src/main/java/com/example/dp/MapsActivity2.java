@@ -1,5 +1,6 @@
 package com.example.dp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -13,7 +14,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -28,6 +31,8 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
 
     private GoogleMap mMap;
     private ArrayList<House> houses;
+    private int id;
+    private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,26 +45,6 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
 
         Intent intent = getIntent();
         houses = (ArrayList<House>) getIntent().getSerializableExtra("houss");
-       // houses= intent.("houss");
-
-//
-//        Retrofit retrofit=new Retrofit.Builder().baseUrl(APIUrl.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
-//        APIService service=retrofit.create(APIService.class);
-//        houses=new ArrayList<>();
-//        Call<HouseList> call=service.getUsers();
-//        call.enqueue(new Callback<HouseList>() {
-//            @Override
-//            public void onResponse(Call<HouseList> call, Response<HouseList> response) {
-//                houses=response.body().getHouses();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<HouseList> call, Throwable t) {
-//
-//            }
-//        });
-
-
 
     }
 
@@ -77,6 +62,14 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        UiSettings uiSettings = mMap.getUiSettings();
+        uiSettings.setIndoorLevelPickerEnabled(true);
+        uiSettings.setMyLocationButtonEnabled(true);
+        uiSettings.setMapToolbarEnabled(true);
+        uiSettings.setCompassEnabled(true);
+        uiSettings.setZoomControlsEnabled(true);
+
+
         int i=0;
 
         while (i<houses.size())
@@ -92,5 +85,34 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
 //        LatLng sydney = new LatLng(-34, 151);
 //        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+
+        if (googleMap != null) {
+
+            // More info: https://developers.google.com/maps/documentation/android/infowindows
+            mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                @Override
+                public void onInfoWindowClick(Marker marker) {
+                    String title = marker.getTitle();
+                    int j=0;
+                    while (j<houses.size())
+                    {
+                        final House house = houses.get(j);
+                        if (house.getTitle().contains(title)){
+                            Intent intent = ViewPagerActivity.newIntent(getApplicationContext(),house.getId());
+                            getApplicationContext().startActivity(intent);
+                            break;
+                        }
+                        j++;
+                    }
+
+                }
+            });
+        }
+
+       // mMap.setMinZoomPreference(10);
+        LatLng ny = new LatLng(54.7113506, 20.5061358);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ny,10));
+
     }
 }
