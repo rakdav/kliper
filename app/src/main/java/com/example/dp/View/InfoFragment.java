@@ -17,6 +17,12 @@ import com.example.dp.Model.AgentsList;
 import com.example.dp.Model.House;
 import com.example.dp.Model.HouseList;
 import com.example.dp.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
@@ -26,10 +32,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class InfoFragment extends Fragment {
+public class InfoFragment extends Fragment implements OnMapReadyCallback {
     private AgentsAdapter adapter;
     private RecyclerView rv;
     private ArrayList<Agent> agents;
+
+    private MapView mapView;
+    private GoogleMap gmap;
+    private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
 
     public InfoFragment() {
         // Required empty public constructor
@@ -58,13 +68,16 @@ public class InfoFragment extends Fragment {
             }
         });
 
+        Bundle mapViewBundle = null;
+        if (savedInstanceState != null) {
+            mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
+        }
 
-
-
+        mapView = v.findViewById(R.id.mapView2);
+        mapView.onCreate(mapViewBundle);
+        mapView.getMapAsync(this);
         return v;
-
     }
-
 
     private void Update(ArrayList<Agent> h)
     {
@@ -74,4 +87,61 @@ public class InfoFragment extends Fragment {
         rv.setAdapter(adapter);
     }
 
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        Bundle mapViewBundle = outState.getBundle(MAP_VIEW_BUNDLE_KEY);
+        if (mapViewBundle == null) {
+            mapViewBundle = new Bundle();
+            outState.putBundle(MAP_VIEW_BUNDLE_KEY, mapViewBundle);
+        }
+
+        mapView.onSaveInstanceState(mapViewBundle);
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+    @Override
+    public void onPause() {
+        mapView.onPause();
+        super.onPause();
+    }
+    @Override
+    public void onDestroy() {
+        mapView.onDestroy();
+        super.onDestroy();
+    }
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        gmap = googleMap;
+        gmap.setMinZoomPreference(12);
+        LatLng ny = new LatLng(54.7113506, 20.5061358);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(ny).title("Клипер");
+        gmap.addMarker(markerOptions);
+        gmap.moveCamera(CameraUpdateFactory.newLatLng(ny));
+    }
 }
