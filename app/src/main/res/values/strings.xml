@@ -14,8 +14,10 @@
     <string name="other">Другие</string>
     <string name="land">Участок</string>
     <string name="price">Стоимость :</string>
-    <string name="mkv">М/КВ</string>
-    <string name="rooms">Комнат</string>
+    <string name="mkv">Площадь:</string>
+    <string name="mkvz">Жилая:</string>
+    <string name="mkvk">Кухня:</string>
+    <string name="rooms">Комнат:</string>
     <string name="floor">Этаж</string>
     <string name="typen">Тип недвижимости:</string>
     <string name="typezd">Тип сделки:</string>

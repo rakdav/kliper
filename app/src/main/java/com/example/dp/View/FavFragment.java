@@ -65,6 +65,8 @@ public class FavFragment extends Fragment {
     private ImageView image;
     private TextView Etazz;
     private TextView Mkv;
+    private TextView Mkvz;
+    private TextView Mkvk;
     private TextView Rooms;
     private TextView Price;
     private TextView Discr;
@@ -120,10 +122,12 @@ public class FavFragment extends Fragment {
         Price = (TextView) v.findViewById(R.id.price);
         Price.setText("Стоимость: " + currencyFormat.format(Integer.parseInt(house.getPrice_total())));
         ////////block metri i td
-        Etazz = (TextView) v.findViewById(R.id.etaz);
-        Etazz.setText(house.getFloor());
         Mkv = (TextView) v.findViewById(R.id.mkv);
-        Mkv.setText(house.getArea());
+        Mkv.setText(house.getArea()+" кв.м");
+        Mkvz = (TextView) v.findViewById(R.id.mkvz);
+        Mkvz.setText(house.getLive_area()+" кв.м");
+        Mkvk = (TextView) v.findViewById(R.id.mkvk);
+        Mkvk.setText(house.getKitchen_area()+" кв.м");
         Rooms = (TextView) v.findViewById(R.id.rooms);
         Rooms.setText(house.getRooms());
         //////////opisanie
