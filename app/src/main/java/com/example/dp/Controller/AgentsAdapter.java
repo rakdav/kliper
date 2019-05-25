@@ -3,6 +3,7 @@ package com.example.dp.Controller;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -52,6 +53,7 @@ public class AgentsAdapter extends RecyclerView.Adapter<AgentsAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         final Agent agent = agents.get(i);
+        mHandler = new Handler(Looper.getMainLooper());
         viewHolder.name.setText(agent.getName());
         viewHolder.position.setText(agent.getPosition());
         viewHolder.group_name.setText(agent.getGroupName());
