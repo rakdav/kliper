@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -48,7 +49,12 @@ public class SuperActivity extends AppCompatActivity {
     private boolean Find;
     private boolean Sear;
     private ArrayList<House> houses;
-
+    private SharedPreferences mSettings;
+    public static final String APP_PREFERENCES = "mysettings";
+    public static final String APP_PREFERENCES_MAIN = "Main";
+    public static final String APP_PREFERENCES_SEARCH = "Search";
+    public static final String APP_PREFERENCES_FAVORITE = "Favorite";
+    private SharedPreferences.Editor editor;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -103,12 +109,41 @@ public class SuperActivity extends AppCompatActivity {
         setContentView(R.layout.activity_super);
         BottomNavigationView navView = findViewById(R.id.navigation);
         fragmentManager=getSupportFragmentManager();
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.container,new InfoFragment());
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         toolbar = getSupportActionBar();
+        if(mSettings.contains(APP_PREFERENCES_FAVORITE))
+        {
+                fragmentTransaction.replace(R.id.container,new FavoriteFragment());
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                editor = mSettings.edit().remove(APP_PREFERENCES_FAVORITE);
+                editor.apply();
+                Map=true;
+                Find=false;
+                Sear=false;
+                toolbar.setTitle("Поиск");
+                invalidateOptionsMenu();
+        }
+        else  if(mSettings.contains(APP_PREFERENCES_SEARCH))
+        {
+            fragmentTransaction.replace(R.id.container,new HomeFragment());
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+            editor = mSettings.edit().remove(APP_PREFERENCES_SEARCH);
+            editor.apply();
+            Map=true;
+            Find=false;
+            Sear=false;
+            toolbar.setTitle("Поиск");
+            invalidateOptionsMenu();
+        }
+        else {
+            fragmentTransaction.add(R.id.container, new InfoFragment());
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }
+        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         toolbar.setTitle("Клипер");
         Map=true;
         Find=true;
@@ -169,5 +204,11 @@ public class SuperActivity extends AppCompatActivity {
         });
 
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 }

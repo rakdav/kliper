@@ -53,10 +53,13 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".ViewPagerActivity" />
+        <activity android:name=".ViewPagerActivity"
+            android:parentActivityName=".SuperActivity"/>
         <activity android:name=".MainActivity" />
-        <activity android:name=".FavoritePagerActivity" />
-        <activity android:name=".SettingsActivity" />
+        <activity android:name=".FavoritePagerActivity"
+            android:parentActivityName=".SuperActivity"/>
+        <activity android:name=".SettingsActivity"
+            />
     </application>
 
 </manifest>
