@@ -65,8 +65,8 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
         //ниже замена houses на housesFilter
         final House house = housesFilter.get(i);
         viewHolder.title.setText(house.getTitle());
-        viewHolder.district.setText(house.getDistrict_title());
-        viewHolder.area.setText(house.getArea());
+        viewHolder.district.setText(house.getDistrict_title()+" район");
+        viewHolder.area.setText(house.getArea()+" кв.м");
         viewHolder.price.setText(currencyFormat.format(Integer.parseInt(house.getPrice_total())));
         Picasso.get().load(house.getPicture_path()).into(viewHolder.image);
         viewHolder.cv.setOnClickListener(new View.OnClickListener() {

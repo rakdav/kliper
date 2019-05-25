@@ -29,6 +29,14 @@
         <item>Калининград</item>
         <item>Зеленоградск</item>
         <item>Светлогорск</item>
+        <item>Советск</item>
+        <item>Черняховск</item>
+        <item>Балтийск</item>
+        <item>Гусев</item>
+        <item>Светлый</item>
+        <item>Гурьевск</item>
+        <item>Гвардейск</item>
+        <item>Пионерский</item>
     </string-array>
     <string name="title_activity_maps">Map</string>
     <string name="title_home">Home</string>
