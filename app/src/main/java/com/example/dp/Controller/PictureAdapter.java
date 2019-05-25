@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import com.example.dp.Model.Agent;
 import com.example.dp.Model.Picture;
 import com.example.dp.R;
+import com.example.dp.View.HouseFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -30,13 +31,14 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.ViewHold
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.picture_item, viewGroup, false);
+        v.setOnClickListener(HouseFragment.onSet);
         return new PictureAdapter.ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         final Picture picture = list.get(i);
-        Picasso.get().load(picture.getUrl()).into(viewHolder.imageView);
+        Picasso.get().load(picture.getUrl()).into(viewHolder.imageView);;
     }
 
     @Override

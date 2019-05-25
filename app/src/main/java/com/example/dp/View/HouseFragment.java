@@ -1,6 +1,7 @@
 package com.example.dp.View;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -9,6 +10,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -57,6 +59,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * A simple {@link Fragment} subclass.
  */
 public class HouseFragment extends Fragment {
+    public static View.OnClickListener onSet;
     private AppDatabase db;
     private static final String ARG_HOUSE_ID = "house_id";
     private House house;
@@ -81,6 +84,7 @@ public class HouseFragment extends Fragment {
     private RecyclerView hrv;
     private PictureAdapter pictureAdapter;
     private Handler mHandler;
+    private PictureList pl;
 
     private static final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
 
@@ -110,6 +114,7 @@ public class HouseFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
        final View v= inflater.inflate(R.layout.fragment_houses, container, false);
+        onSet=new onSet(getContext());
         ///////nazvanie
         mHandler = new Handler(Looper.getMainLooper());
         TitleField = (TextView) v.findViewById(R.id.textHouse);
@@ -241,7 +246,7 @@ public class HouseFragment extends Fragment {
                         try {
                             JSONObject ob = new JSONObject(res);
                             Gson gson=new Gson();
-                            PictureList pl=gson.fromJson(ob.toString(),PictureList.class);
+                            pl=gson.fromJson(ob.toString(),PictureList.class);
                             pictureAdapter=new PictureAdapter(pl.getResults(),getActivity());
                             hrv.setAdapter(pictureAdapter);
                         } catch (JSONException e) {
@@ -253,5 +258,22 @@ public class HouseFragment extends Fragment {
             }
         });
         return v;
+    }
+    public class onSet implements View.OnClickListener
+    {
+        private final Context context;
+
+        private onSet(Context context) {
+            this.context = context;
+        }
+        @Override
+        public void onClick(View v) {
+            removeItem(v);
+        }
+        private void removeItem(View v) {
+            int selectedItemPosition = hrv.getChildPosition(v);
+
+            Picasso.get().load(pl.getResults().get(selectedItemPosition).getUrl()).into(image);
+        }
     }
 }
