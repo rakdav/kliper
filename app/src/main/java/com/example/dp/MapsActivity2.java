@@ -163,7 +163,6 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
                                 for (House h : t2) {
                                     if ( h.getCity_title()!= null && h.getCity_title().equals("Калининград")) t3.add(h);
                                 }
-
                             }
                             if (town.contains("Светлогорск")){
                                 for (House h : t2) {
@@ -171,9 +170,49 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
                                 }
 
                             }
+                            if (town.contains("Советск")){
+                                for (House h : t2) {
+                                    if ( h.getCity_title()!= null && h.getCity_title().equals("Советск")) t3.add(h);
+                                }
+                            }
                             if (town.contains("Зеленоградск")){
                                 for (House h : t2) {
                                     if ( h.getCity_title()!= null && h.getCity_title().equals("Зеленоградск")) t3.add(h);
+                                }
+                            }
+                            if (town.contains("Черняховск")){
+                                for (House h : t2) {
+                                    if ( h.getCity_title()!= null && h.getCity_title().equals("Черняховск")) t3.add(h);
+                                }
+                            }
+                            if (town.contains("Балтийск")){
+                                for (House h : t2) {
+                                    if ( h.getCity_title()!= null && h.getCity_title().equals("Балтийск")) t3.add(h);
+                                }
+                            }
+                            if (town.contains("Гусев")){
+                                for (House h : t2) {
+                                    if ( h.getCity_title()!= null && h.getCity_title().equals("Гусев")) t3.add(h);
+                                }
+                            }
+                            if (town.contains("Светлый")){
+                                for (House h : t2) {
+                                    if ( h.getCity_title()!= null && h.getCity_title().equals("Светлый")) t3.add(h);
+                                }
+                            }
+                            if (town.contains("Гурьевск")){
+                                for (House h : t2) {
+                                    if ( h.getCity_title()!= null && h.getCity_title().equals("Гурьевск")) t3.add(h);
+                                }
+                            }
+                            if (town.contains("Гвардейск")){
+                                for (House h : t2) {
+                                    if ( h.getCity_title()!= null && h.getCity_title().equals("Гвардейск")) t3.add(h);
+                                }
+                            }
+                            if (town.contains("Пионерский")){
+                                for (House h : t2) {
+                                    if ( h.getCity_title()!= null && h.getCity_title().equals("Пионерский")) t3.add(h);
                                 }
                             }
                             if(town.contains("false"))
