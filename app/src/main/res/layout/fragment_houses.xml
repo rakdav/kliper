@@ -74,28 +74,41 @@
             android:id="@+id/hrv"
             />
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/mapbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/holo_green_light"
-                android:src="@android:drawable/ic_dialog_map" />
-
-            <ImageButton
-                android:id="@+id/imageButton2"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:src="@android:drawable/stat_sys_speakerphone" />
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/mapbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#E91E63"
+                    android:src="@android:drawable/ic_dialog_map" />
+
+                <ImageButton
+                    android:id="@+id/imageButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#8BC34A"
+                    android:src="@android:drawable/stat_sys_speakerphone" />
+            </LinearLayout>
         </LinearLayout>
 
+        <Button
+            android:id="@+id/fawBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:text="Добавить в избранное" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -283,12 +296,6 @@
             android:layout_height="0dp"
             android:text="TextView"
             android:visibility="invisible" />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Добавить в избранное"
-            android:background="@color/colorPrimary"
-            android:id="@+id/fawBtn"/>
 
     </LinearLayout>
 
