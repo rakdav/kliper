@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,19 +26,28 @@ import com.example.dp.API.APIUrl;
 import com.example.dp.API.HouseDao;
 import com.example.dp.App.App;
 import com.example.dp.Controller.FavoriteAdapter;
+import com.example.dp.Controller.PictureAdapter;
 import com.example.dp.MapsActivity;
 import com.example.dp.Model.Agent;
 import com.example.dp.Model.AppDatabase;
 import com.example.dp.Model.Home;
 import com.example.dp.Model.House;
 import com.example.dp.Model.HouseLab;
+import com.example.dp.Model.PictureList;
 import com.example.dp.R;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -70,6 +81,9 @@ public class FavFragment extends Fragment {
     private Button update;
     private Button delete;
     private EditText comment;
+    private Handler mHandler;
+    private RecyclerView hrv;
+    private PictureAdapter pictureAdapter;
 
     private static final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
 
@@ -100,6 +114,7 @@ public class FavFragment extends Fragment {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_fav, container, false);
         ///////nazvanie
+        mHandler = new Handler(Looper.getMainLooper());
         TitleField = (TextView) v.findViewById(R.id.textHouse);
         TitleField.setText(house.getTitle());
         Price = (TextView) v.findViewById(R.id.price);
@@ -233,6 +248,39 @@ public class FavFragment extends Fragment {
         Lat.setText(house.getLatitude());
         Lng = (TextView) v.findViewById(R.id.Lng);
         Lng.setText(house.getLongitude());
+        hrv=v.findViewById(R.id.hrv);
+        hrv.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+        String uri = APIUrl.BASE_URL + "picture/EstatePhoto?key=6d35e1f591aa413189aa34cd93dc26fb&estate_id="+Id+"&width=640&height=480&crop=1&watermark=0";
+        OkHttpClient client = new OkHttpClient();
+        final Request request = new Request.Builder()
+                .url(uri)
+                .build();
+        client.newCall(request).enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(okhttp3.Call call, IOException e) {
+            }
+
+            @Override
+            public void onResponse(okhttp3.Call call, final okhttp3.Response response) throws IOException {
+
+                final String res = response.body().string();
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject ob = new JSONObject(res);
+                            Gson gson=new Gson();
+                            PictureList pl=gson.fromJson(ob.toString(),PictureList.class);
+                            pictureAdapter=new PictureAdapter(pl.getResults(),getActivity());
+                            hrv.setAdapter(pictureAdapter);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+                });
+            }
+        });
         return v;
     }
 }

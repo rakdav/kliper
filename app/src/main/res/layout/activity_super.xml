@@ -1,56 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SuperActivity">
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/container"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".SuperActivity">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:clickable="true"
-        app:backgroundTint="#2196F3"
-        app:layout_constraintBottom_toBottomOf="@+id/navigation"
-        app:layout_constraintEnd_toEndOf="@+id/frame_container"
-        app:layout_constraintHorizontal_bias="0.953"
-        app:layout_constraintStart_toStartOf="@+id/frame_container"
-        app:layout_constraintTop_toTopOf="@+id/frame_container"
-        app:layout_constraintVertical_bias="0.887"
-        app:srcCompat="@drawable/search_ic_search_black_24dp" />
+<android.support.design.widget.FloatingActionButton
+android:id="@+id/fabSearch"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_marginStart="8dp"
+android:layout_marginTop="8dp"
+android:layout_marginBottom="8dp"
+android:clickable="true"
+app:backgroundTint="#2196F3"
+app:layout_constraintBottom_toBottomOf="@+id/navigation"
+app:layout_constraintEnd_toEndOf="@+id/frame_container"
+app:layout_constraintHorizontal_bias="0.953"
+app:layout_constraintStart_toStartOf="@+id/frame_container"
+app:layout_constraintTop_toTopOf="@+id/frame_container"
+app:layout_constraintVertical_bias="0.887"
+app:srcCompat="@drawable/search_ic_search_black_24dp" />
 
-    <FrameLayout
-        android:id="@+id/frame_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+<FrameLayout
+android:id="@+id/frame_container"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+app:layout_constraintBottom_toBottomOf="parent"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintHorizontal_bias="1.0"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintTop_toTopOf="parent"
+app:layout_constraintVertical_bias="1.0"/>
 
-    </FrameLayout>
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorPrimary"
-        android:foreground="?attr/selectableItemBackground"
-        app:itemBackground="@color/colorPrimary"
-        app:itemIconTint="@android:color/white"
-        app:itemTextColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/frame_container"
-        app:layout_constraintTop_toTopOf="@+id/frame_container"
-        app:layout_constraintVertical_bias="1.0"
-        app:menu="@menu/bottom_nav_menu"
-        tools:layout_editor_absoluteX="-39dp" />
+<android.support.design.widget.BottomNavigationView
+android:id="@+id/navigation"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_marginTop="8dp"
+android:background="@color/colorPrimary"
+android:foreground="?attr/selectableItemBackground"
+app:itemBackground="@color/colorPrimary"
+app:itemIconTint="@android:color/white"
+app:itemTextColor="@android:color/white"
+app:layout_constraintBottom_toBottomOf="@+id/frame_container"
+app:layout_constraintTop_toTopOf="@+id/frame_container"
+app:layout_constraintVertical_bias="1.0"
+app:menu="@menu/bottom_nav_menu"
+tools:layout_editor_absoluteX="-39dp" />
 
 </android.support.constraint.ConstraintLayout>
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--tools:context=".SuperActivity">-->
+
+    <!--<android.support.design.widget.AppBarLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:theme="@style/AppTheme.AppBarOverlay">-->
+
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <!--android:background="?attr/colorPrimary"-->
+            <!--app:popupTheme="@style/AppTheme.PopupOverlay" />-->
+
+    <!--</android.support.design.widget.AppBarLayout>-->
+    <!--<android.support.constraint.ConstraintLayout-->
+        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--xmlns:tools="http://schemas.android.com/tools"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/cont"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+        <!--tools:context=".SuperActivity"-->
+        <!--tools:showIn="@layout/activity_super">-->
+    <!--<FrameLayout-->
+    <!--android:id="@+id/frame_container"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"/>-->
+    <!--</android.support.constraint.ConstraintLayout>-->
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/fabSearch"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|end"-->
+        <!--android:layout_marginBottom="80dp"-->
+        <!--android:layout_marginRight="40dp"-->
+        <!--app:srcCompat="@android:drawable/ic_dialog_email" />-->
+
+    <!--<android.support.design.widget.BottomNavigationView-->
+    <!--android:id="@+id/navigation"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--android:background="@color/colorPrimary"-->
+    <!--android:foreground="?attr/selectableItemBackground"-->
+    <!--app:itemBackground="@color/colorPrimary"-->
+    <!--app:itemIconTint="@android:color/white"-->
+    <!--app:itemTextColor="@android:color/white"-->
+    <!--app:layout_constraintBottom_toBottomOf="@+id/cont"-->
+    <!--app:layout_constraintTop_toTopOf="@+id/frame_container"-->
+    <!--app:layout_constraintVertical_bias="1.0"-->
+    <!--app:menu="@menu/bottom_nav_menu"-->
+    <!--tools:layout_editor_absoluteX="-39dp"-->
+    <!--android:layout_gravity="bottom|end"/>-->
+
+<!--</android.support.design.widget.CoordinatorLayout>-->
