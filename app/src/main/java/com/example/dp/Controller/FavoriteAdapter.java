@@ -2,6 +2,7 @@ package com.example.dp.Controller;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -18,6 +19,7 @@ import com.example.dp.FavoritePagerActivity;
 import com.example.dp.Model.House;
 import com.example.dp.Model.HouseLab;
 import com.example.dp.R;
+import com.example.dp.SuperActivity;
 import com.example.dp.ViewPagerActivity;
 import com.squareup.picasso.Picasso;
 
@@ -32,6 +34,9 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     private Context context;
     private Typeface tf;
     private static final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
+    private SharedPreferences.Editor editor;
+    private SharedPreferences mSettings;
+
 
     public FavoriteAdapter(List<House> houses, Context context) {
         this.houses = houses;
@@ -68,6 +73,10 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 Intent intent = FavoritePagerActivity.newIntent(context,house.getId());
+                mSettings = context.getSharedPreferences(SuperActivity.APP_PREFERENCES, Context.MODE_PRIVATE);
+                editor = mSettings.edit();
+                editor.putString(SuperActivity.APP_PREFERENCES_FAVORITE,"1");
+                editor.apply();
                 context.startActivity(intent);
             }
         });

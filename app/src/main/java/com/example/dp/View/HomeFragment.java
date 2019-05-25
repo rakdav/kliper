@@ -1,23 +1,22 @@
 package com.example.dp.View;
 
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.dp.API.APIService;
 import com.example.dp.API.APIUrl;
 import com.example.dp.Controller.HouseAdapter;
-import com.example.dp.Model.Home;
+import com.example.dp.MainActivity;
 import com.example.dp.Model.House;
 import com.example.dp.Model.HouseList;
 import com.example.dp.R;
-import com.example.dp.SettingsActivity;
 import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,10 +27,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment {
-    private HouseAdapter adapter;
+public class HomeFragment extends Fragment{
     private RecyclerView rv;
+    private HouseAdapter adapter;
     private ArrayList<House> houses;
+    SearchView searchView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -61,6 +61,7 @@ public class HomeFragment extends Fragment {
 
             }
         });
+
         return v;
     }
 
@@ -218,5 +219,4 @@ public class HomeFragment extends Fragment {
         adapter.notifyDataSetChanged();
         rv.setAdapter(adapter);
     }
-
 }
