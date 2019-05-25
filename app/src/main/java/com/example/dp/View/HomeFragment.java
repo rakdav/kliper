@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment{
     {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_home, container, false);
-        rv=(RecyclerView)v.findViewById(R.id.rv);
+        rv=v.findViewById(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         Retrofit retrofit=new Retrofit.Builder().baseUrl(APIUrl.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         APIService service=retrofit.create(APIService.class);

@@ -10,7 +10,7 @@ public class AgentsList {
 
     public ArrayList<Agent> getResults() {
         return agents;
-    }
+}
 
     public void setResults(ArrayList<Agent> results) {
         this.agents = results;

@@ -1,9 +1,9 @@
 package com.example.dp.Model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+        import com.google.gson.annotations.Expose;
+        import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
+        import java.io.Serializable;
 
 public class Agent implements Serializable {
     @SerializedName("email")
