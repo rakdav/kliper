@@ -15,8 +15,10 @@ import retrofit2.http.Query;
 
 public interface APIService
 {
-    @GET("estate/search?key=6d35e1f591aa413189aa34cd93dc26fb")
+    @GET("estate/search?key=6d35e1f591aa413189aa34cd93dc26fb&status=0&count=850")
     Call<HouseList> getUsers();
+    @GET("estate/search?key=6d35e1f591aa413189aa34cd93dc26fb&status=0&count=200")
+    Call<HouseList> getUserss();
     @GET("estate/info?key=6d35e1f591aa413189aa34cd93dc26fb")
     Call<Home> getData(@Query("id") int id);
     @GET("agent/info?key=6d35e1f591aa413189aa34cd93dc26fb")

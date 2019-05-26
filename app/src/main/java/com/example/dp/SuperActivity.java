@@ -163,7 +163,7 @@ public class SuperActivity extends AppCompatActivity {
         Retrofit retrofit=new Retrofit.Builder().baseUrl(APIUrl.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         APIService service=retrofit.create(APIService.class);
         houses=new ArrayList<>();
-        Call<HouseList> call=service.getUsers();
+        Call<HouseList> call=service.getUserss();
         call.enqueue(new Callback<HouseList>() {
             @Override
             public void onResponse(Call<HouseList> call, Response<HouseList> response) {
