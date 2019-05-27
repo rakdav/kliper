@@ -27,6 +27,8 @@ public interface APIService
     Call<AgentsList> getAgents();
     @GET("picture/EstatePhoto?key=6d35e1f591aa413189aa34cd93dc26fb&estate_id={id}&width=640&height=480&crop=1&watermark=0")
     Call<PictureList> getPictures(@Path("id") int id);
+    @GET ("picture/EstateLayout?key=6d35e1f591aa413189aa34cd93dc26fb&estate_id={id}&width=640&height=480&crop=1&watermark=0")
+    Call<PictureList>getPlans(@Path("id") int id);
 }
 
 

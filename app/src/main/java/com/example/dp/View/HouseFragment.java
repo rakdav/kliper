@@ -83,8 +83,11 @@ public class HouseFragment extends Fragment {
     private TextView Lng;
     private TextView Lat;
     private Button FawBtn;
+    private Button Plan;
+    private Button Gall;
     private RecyclerView hrv;
     private PictureAdapter pictureAdapter;
+    private PictureAdapter pictureAdapterr;
     private Handler mHandler;
     private PictureList pl;
 
@@ -224,6 +227,23 @@ public class HouseFragment extends Fragment {
         });
 
 
+        Plan=v.findViewById(R.id.plann);
+        Plan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hrv.setAdapter(pictureAdapterr);
+            }
+        });
+
+        Gall=v.findViewById(R.id.gall);
+        Gall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hrv.setAdapter(pictureAdapter);
+            }
+        });
+
+
         Lat = (TextView) v.findViewById(R.id.Lat);
         Lat.setText(house.getLatitude());
         Lng = (TextView) v.findViewById(R.id.Lng);
@@ -261,6 +281,54 @@ public class HouseFragment extends Fragment {
                 });
             }
         });
+
+
+
+
+
+
+        String urii = APIUrl.BASE_URL + "picture/EstateLayout?key=6d35e1f591aa413189aa34cd93dc26fb&estate_id="+Id+"&width=640&height=480&crop=1&watermark=0";
+        OkHttpClient clientt = new OkHttpClient();
+        final Request requestt = new Request.Builder()
+                .url(urii)
+                .build();
+        clientt.newCall(requestt).enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(okhttp3.Call call, IOException e) {
+            }
+
+            @Override
+            public void onResponse(okhttp3.Call call, final okhttp3.Response response) throws IOException {
+
+                final String res = response.body().string();
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject ob = new JSONObject(res);
+                            Gson gson=new Gson();
+                            pl=gson.fromJson(ob.toString(),PictureList.class);
+                            pictureAdapterr=new PictureAdapter(pl.getResults(),getActivity());
+                           // hrv.setAdapter(pictureAdapter);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+                });
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
         return v;
     }
     public class onSet implements View.OnClickListener
