@@ -254,7 +254,7 @@ public class FavFragment extends Fragment {
         Lng.setText(house.getLongitude());
         hrv=v.findViewById(R.id.hrv);
         hrv.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-        String uri = APIUrl.BASE_URL + "picture/EstatePhoto?key=6d35e1f591aa413189aa34cd93dc26fb&estate_id="+Id+"&width=640&height=480&crop=1&watermark=0";
+        String uri = APIUrl.BASE_URL + "picture/EstatePhoto?key=6d35e1f591aa413189aa34cd93dc26fb&estate_id="+Id+"&width=1280&height=1024&crop=1&watermark=0";
         OkHttpClient client = new OkHttpClient();
         final Request request = new Request.Builder()
                 .url(uri)

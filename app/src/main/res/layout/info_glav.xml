@@ -30,8 +30,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvagents"
             android:layout_width="match_parent"
-            android:layout_height="568dp"
-            android:layout_marginBottom="160dp" />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

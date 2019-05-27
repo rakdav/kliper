@@ -59,7 +59,6 @@ public class AgentsAdapter extends RecyclerView.Adapter<AgentsAdapter.ViewHolder
         viewHolder.group_name.setText(agent.getGroupName());
         viewHolder.mobile_phone.setText(agent.getMobilePhone());
         viewHolder.phone.setText(agent.getPhone());
-        viewHolder.email.setText(agent.getEmail());
         String uri = APIUrl.BASE_URL + "picture/AgentPhoto?key=6d35e1f591aa413189aa34cd93dc26fb&agent_id="+agent.getId()+"&width=200&height=400&crop=0";
         OkHttpClient client = new OkHttpClient();
         final Request request = new Request.Builder()
@@ -106,7 +105,6 @@ public class AgentsAdapter extends RecyclerView.Adapter<AgentsAdapter.ViewHolder
         private TextView group_name;
         private TextView mobile_phone;
         private TextView phone;
-        private TextView email;
         private ImageView imageView;
 
 
@@ -123,8 +121,6 @@ public class AgentsAdapter extends RecyclerView.Adapter<AgentsAdapter.ViewHolder
             mobile_phone.setTypeface(tf);
             phone=(TextView)itemView.findViewById(R.id.phone);
             phone.setTypeface(tf);
-            email=(TextView)itemView.findViewById(R.id.email);
-            email.setTypeface(tf);
         }
 
     }
