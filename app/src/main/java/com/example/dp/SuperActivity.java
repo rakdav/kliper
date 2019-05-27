@@ -112,37 +112,9 @@ public class SuperActivity extends AppCompatActivity {
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         toolbar = getSupportActionBar();
-//        if(mSettings.contains(APP_PREFERENCES_FAVORITE))
-//        {
-//                fragmentTransaction.replace(R.id.container,new FavoriteFragment());
-//                fragmentTransaction.addToBackStack(null);
-//                fragmentTransaction.commit();
-//                editor = mSettings.edit().remove(APP_PREFERENCES_FAVORITE);
-//                editor.apply();
-//                Map=true;
-//                Find=false;
-//                Sear=false;
-//                toolbar.setTitle("Поиск");
-//                invalidateOptionsMenu();
-//        }
-//        else  if(mSettings.contains(APP_PREFERENCES_SEARCH))
-//        {
-//            fragmentTransaction.replace(R.id.container,new HomeFragment());
-//            fragmentTransaction.addToBackStack(null);
-//            fragmentTransaction.commit();
-//            editor = mSettings.edit().remove(APP_PREFERENCES_SEARCH);
-//            editor.apply();
-//            Map=true;
-//            Find=false;
-//            Sear=false;
-//            toolbar.setTitle("Поиск");
-//            invalidateOptionsMenu();
-//        }
-//        else {
             fragmentTransaction.add(R.id.container, new InfoFragment());
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
-//        }
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         toolbar.setTitle("Клипер");
         Map=true;

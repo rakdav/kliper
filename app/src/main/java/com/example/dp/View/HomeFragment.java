@@ -1,22 +1,28 @@
 package com.example.dp.View;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.dp.API.APIService;
 import com.example.dp.API.APIUrl;
 import com.example.dp.Controller.HouseAdapter;
-import com.example.dp.MainActivity;
 import com.example.dp.Model.House;
 import com.example.dp.Model.HouseList;
 import com.example.dp.R;
+
 import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,11 +33,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment{
+public class HomeFragment extends Fragment {
     private RecyclerView rv;
     private HouseAdapter adapter;
     private ArrayList<House> houses;
     SearchView searchView;
+    private MenuItem ItemClear;
+    private MenuItem ItemMap;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -64,7 +72,6 @@ public class HomeFragment extends Fragment{
 
         return v;
     }
-
 
     @Override
     public void onResume() {
@@ -245,11 +252,6 @@ public class HomeFragment extends Fragment{
                }
            }
     }
-
-
-
-
-
 
     private void Update(ArrayList<House> h)
     {
