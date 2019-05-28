@@ -68,18 +68,20 @@
             <ImageButton
                 android:id="@+id/mapbtn"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:layout_weight="1"
-                android:background="@android:color/holo_green_light"
+                android:background="#E91E63"
                 android:src="@android:drawable/ic_dialog_map" />
 
-            <ImageButton
-                android:id="@+id/imageButton2"
+            <Button
+                android:id="@+id/button2"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="35dp"
                 android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:src="@android:drawable/stat_sys_speakerphone" />
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:background="@android:color/holo_green_light"
+                android:drawableStart="@android:drawable/stat_sys_phone_call" />
         </LinearLayout>
 
 
@@ -94,12 +96,14 @@
             android:layout_height="wrap_content"
             android:background="@android:drawable/edit_text"
             android:text="TextView"
-            android:textAlignment="viewStart" />
+            android:textAlignment="viewStart"
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/textView14"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColorLink="#03A9F4" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -249,27 +253,52 @@
             android:layout_height="0dp"
             android:text="TextView"
             android:visibility="invisible" />
-        <EditText
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/comment"
-            android:hint="Комментарий"/>
-        <Button
-            android:layout_width="200dp"
             android:layout_height="match_parent"
-            android:text="Редактировать"
-            android:layout_marginTop="15dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@color/colorLight"
-            android:id="@+id/update"/>
-        <Button
-            android:layout_width="200dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
-            android:text="Удалить"
-            android:layout_gravity="center_horizontal"
-            android:background="@color/colorRed"
-            android:id="@+id/delete"/>
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Комментарий" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fabbbb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:src="@drawable/ic_notifications_black_24dp"
+                    app:backgroundTint="#03A9F4" />
+
+                <Button
+                    android:id="@+id/update"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/colorLight"
+                    android:text="Сохранить" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/delete"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:background="@color/colorRed"
+                android:text="Удалить" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </ScrollView>

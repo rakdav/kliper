@@ -1,31 +1,36 @@
 package com.example.dp.View;
 
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.TimePicker;
 
 import com.example.dp.API.APIService;
 import com.example.dp.API.APIUrl;
 import com.example.dp.API.HouseDao;
 import com.example.dp.App.App;
-import com.example.dp.Controller.FavoriteAdapter;
 import com.example.dp.Controller.PictureAdapter;
 import com.example.dp.MapsActivity;
 import com.example.dp.Model.Agent;
@@ -37,15 +42,10 @@ import com.example.dp.Model.PictureList;
 import com.example.dp.R;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.List;
-
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Call;
@@ -73,9 +73,10 @@ public class FavFragment extends Fragment {
     private TextView Typen;
     private TextView Sdel;
     private TextView Etaza;
+    private String agentName;
     private TextView Raion;
     private ImageButton mapBtn;
-    private ImageButton phnBtn;
+    private Button phnBtn;
     private String phone;
     private int Id;
     private TextView Lng;
@@ -86,7 +87,8 @@ public class FavFragment extends Fragment {
     private Handler mHandler;
     private RecyclerView hrv;
     private PictureAdapter pictureAdapter;
-
+    private FloatingActionButton fabbb;
+    Calendar dateAndTime=Calendar.getInstance();
     private static final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
 
     public FavFragment() {
@@ -132,8 +134,8 @@ public class FavFragment extends Fragment {
         Rooms.setText(house.getRooms());
         //////////opisanie
         Discr = (TextView) v.findViewById(R.id.opis);
-        Discr.setText(house.getDescription());
-        phnBtn=(ImageButton) v.findViewById(R.id.imageButton2);
+        Discr.setText(house.getDescription().replaceAll("(?u)[^а-яА-я.,0-9 ]", ""));
+        phnBtn=(Button) v.findViewById(R.id.button2);
 
         image=v.findViewById(R.id.pictureHouse);
         comment=v.findViewById(R.id.comment);
@@ -153,7 +155,8 @@ public class FavFragment extends Fragment {
                     @Override
                     public void onResponse(Call<Agent> call, Response<Agent> response) {
                         phone=response.body().getAgent().getMobilePhone().replace(" ","").replace("-","").replace("(","").replace(")","");
-
+                        agentName=response.body().getAgent().getName();
+                        phnBtn.setText(agentName);
                     }
 
                     @Override
@@ -179,6 +182,25 @@ public class FavFragment extends Fragment {
         Etaza.setText(house.getFloor());
         Raion = (TextView) v.findViewById(R.id.raion);
         Raion.setText(house.getDistrict_title());
+
+        fabbb=(FloatingActionButton) v.findViewById(R.id.fabbbb);
+        fabbb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new TimePickerDialog(getActivity(), t,
+                        dateAndTime.get(Calendar.HOUR_OF_DAY),
+                        dateAndTime.get(Calendar.MINUTE), true)
+                        .show();
+
+                new DatePickerDialog(getActivity(), d,
+                        dateAndTime.get(Calendar.YEAR),
+                        dateAndTime.get(Calendar.MONTH),
+                        dateAndTime.get(Calendar.DAY_OF_MONTH))
+                        .show();
+            }
+        });
+
+
 
         mapBtn= (ImageButton) v.findViewById(R.id.mapbtn);
         mapBtn.setOnClickListener(new View.OnClickListener() {
@@ -287,4 +309,26 @@ public class FavFragment extends Fragment {
         });
         return v;
     }
+
+
+
+
+    TimePickerDialog.OnTimeSetListener t=new TimePickerDialog.OnTimeSetListener() {
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            dateAndTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            dateAndTime.set(Calendar.MINUTE, minute);
+            //setInitialDateTime();
+        }
+    };
+
+
+
+    DatePickerDialog.OnDateSetListener d=new DatePickerDialog.OnDateSetListener() {
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            dateAndTime.set(Calendar.YEAR, year);
+            dateAndTime.set(Calendar.MONTH, monthOfYear);
+            dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+           // setInitialDateTime();
+        }
+    };
 }

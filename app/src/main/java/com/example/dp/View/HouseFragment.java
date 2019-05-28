@@ -10,7 +10,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,7 +18,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.dp.API.APIService;
@@ -33,19 +31,16 @@ import com.example.dp.Model.AppDatabase;
 import com.example.dp.Model.Home;
 import com.example.dp.Model.House;
 import com.example.dp.Model.HouseLab;
-import com.example.dp.Model.Picture;
 import com.example.dp.Model.PictureList;
 import com.example.dp.R;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.NumberFormat;
-import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -65,7 +60,6 @@ public class HouseFragment extends Fragment {
     private House house;
     private TextView TitleField;
     private ImageView image;
-    private TextView Etazz;
     private TextView Mkv;
     private TextView Mkvz;
     private TextView Mkvk;
@@ -77,8 +71,9 @@ public class HouseFragment extends Fragment {
     private TextView Etaza;
     private TextView Raion;
     private ImageButton mapBtn;
-    private ImageButton phnBtn;
+    private Button phnBtn;
     private String phone;
+    private String agentName;
     private int Id;
     private TextView Lng;
     private TextView Lat;
@@ -134,8 +129,7 @@ public class HouseFragment extends Fragment {
         Rooms.setText(house.getRooms());
         //////////opisanie
         Discr = (TextView) v.findViewById(R.id.opis);
-        Discr.setText(house.getDescription());
-        phnBtn=(ImageButton) v.findViewById(R.id.imageButton2);
+        Discr.setText(house.getDescription().replaceAll("(?u)[^а-яА-я.,0-9 ]", ""));
 
         image=v.findViewById(R.id.pictureHouse);
         Picasso.get().load(house.getPicture_path()).into(image);
@@ -153,7 +147,8 @@ public class HouseFragment extends Fragment {
                     @Override
                     public void onResponse(Call<Agent> call, Response<Agent> response) {
                         phone=response.body().getAgent().getMobilePhone().replace(" ","").replace("-","").replace("(","").replace(")","");
-
+                        agentName=response.body().getAgent().getName();
+                        phnBtn.setText(agentName);
                     }
 
                     @Override
@@ -192,6 +187,8 @@ public class HouseFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        phnBtn=(Button) v.findViewById(R.id.button2);
 
         phnBtn.setOnClickListener(new View.OnClickListener() {
             @Override

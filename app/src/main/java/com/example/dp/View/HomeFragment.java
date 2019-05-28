@@ -1,18 +1,13 @@
 package com.example.dp.View;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,9 +32,6 @@ public class HomeFragment extends Fragment {
     private RecyclerView rv;
     private HouseAdapter adapter;
     private ArrayList<House> houses;
-    SearchView searchView;
-    private MenuItem ItemClear;
-    private MenuItem ItemMap;
 
     public HomeFragment() {
         // Required empty public constructor
