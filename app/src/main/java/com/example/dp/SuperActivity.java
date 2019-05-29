@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -49,6 +50,8 @@ public class SuperActivity extends AppCompatActivity {
     private boolean Find;
     private boolean Sear;
     private ArrayList<House> houses;
+    private ArrayList<House> housess;
+    private Context context;
     private SharedPreferences mSettings;
     public static final String APP_PREFERENCES = "mysettings";
     public static final String APP_PREFERENCES_MAIN = "Main";
@@ -64,16 +67,21 @@ public class SuperActivity extends AppCompatActivity {
             FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    fragmentTransaction.replace(R.id.container,new HomeFragment());
+                    Bundle mArg = new Bundle();
+                    mArg.putSerializable("houses", housess);
+                    HomeFragment mFrg = new HomeFragment();
+                    mFrg.setArguments(mArg);
+                    fragmentTransaction.replace(R.id.container, mFrg);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
-                    Map=true;
-                    Find=false;
-                    Sear=false;
+                    Map = true;
+                    Find = false;
+                    Sear = false;
                     toolbar.setTitle("Поиск");
                     invalidateOptionsMenu();
                     fabSearch.setVisibility(View.VISIBLE);
                     break;
+
                 case R.id.navigation_main:
                     fragmentTransaction.replace(R.id.container,new InfoFragment());
                     fragmentTransaction.addToBackStack(null);
@@ -107,6 +115,23 @@ public class SuperActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_super);
+
+        Retrofit retrofitt=new Retrofit.Builder().baseUrl(APIUrl.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        APIService servicee=retrofitt.create(APIService.class);
+        housess=new ArrayList<>();
+        Call<HouseList> calll=servicee.getUsers();
+        calll.enqueue(new Callback<HouseList>() {
+            @Override
+            public void onResponse(Call<HouseList> call, Response<HouseList> response) {
+                housess=response.body().getHouses();
+            }
+
+            @Override
+            public void onFailure(Call<HouseList> call, Throwable t) {
+
+            }
+        });
+
         BottomNavigationView navView = findViewById(R.id.navigation);
         fragmentManager=getSupportFragmentManager();
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
@@ -129,9 +154,6 @@ public class SuperActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
         Retrofit retrofit=new Retrofit.Builder().baseUrl(APIUrl.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         APIService service=retrofit.create(APIService.class);
         houses=new ArrayList<>();
@@ -144,13 +166,8 @@ public class SuperActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<HouseList> call, Throwable t) {
-
             }
         });
-
-
-
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
