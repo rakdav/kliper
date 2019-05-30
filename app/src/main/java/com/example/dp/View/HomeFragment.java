@@ -43,9 +43,6 @@ public class HomeFragment extends Fragment {
         rv=v.findViewById(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        houses = (ArrayList<House>) getArguments().get("houses");
-        if (houses.size()==0)
-         {
         Retrofit retrofit=new Retrofit.Builder().baseUrl(APIUrl.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         APIService service=retrofit.create(APIService.class);
         houses=new ArrayList<>();
@@ -62,10 +59,6 @@ public class HomeFragment extends Fragment {
 
             }
         });
-          }
-        else {
-            Update(houses);
-        }
         return v;
     }
 

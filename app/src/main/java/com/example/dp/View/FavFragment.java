@@ -2,7 +2,10 @@ package com.example.dp.View;
 
 
 import android.app.DatePickerDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.net.Uri;
@@ -13,6 +16,7 @@ import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
@@ -54,6 +58,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.content.Context.NOTIFICATION_SERVICE;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -87,7 +93,9 @@ public class FavFragment extends Fragment {
     private Handler mHandler;
     private RecyclerView hrv;
     private PictureAdapter pictureAdapter;
-    private FloatingActionButton fabbb;
+    private Button fabbb;
+    private TextView Dattime;
+
     Calendar dateAndTime=Calendar.getInstance();
     private static final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
 
@@ -110,13 +118,12 @@ public class FavFragment extends Fragment {
         house= HouseLab.get(getActivity()).getHouse(Id);
         db = App.getInstance().getDatabase();
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_fav, container, false);
+
         ///////nazvanie
         mHandler = new Handler(Looper.getMainLooper());
         TitleField = (TextView) v.findViewById(R.id.textHouse);
@@ -140,6 +147,10 @@ public class FavFragment extends Fragment {
         image=v.findViewById(R.id.pictureHouse);
         comment=v.findViewById(R.id.comment);
         comment.setText(house.getComment());
+
+        Dattime=(TextView) v.findViewById(R.id.dattime);
+
+        setInitialDateTime();
         Picasso.get().load(house.getPicture_path()).into(image);
         Retrofit retrofit=new Retrofit.Builder().baseUrl(APIUrl.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         APIService service=retrofit.create(APIService.class);
@@ -183,7 +194,7 @@ public class FavFragment extends Fragment {
         Raion = (TextView) v.findViewById(R.id.raion);
         Raion.setText(house.getDistrict_title());
 
-        fabbb=(FloatingActionButton) v.findViewById(R.id.fabbbb);
+        fabbb=(Button) v.findViewById(R.id.dat);
         fabbb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -229,6 +240,21 @@ public class FavFragment extends Fragment {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                NotificationCompat.Builder builder =
+                        new NotificationCompat.Builder(getActivity())
+                                .setSmallIcon(R.mipmap.ic_launcher)
+                                .setContentTitle("Title")
+                                .setContentText("Notification text");
+
+                Notification notification = builder.build();
+
+                NotificationManager notificationManager =
+                        (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
+                notificationManager.notify(1, notification);
+
+
+
                 house.setComment(comment.getText().toString());
                 class UpdateHouse extends AsyncTask<Void,Void,Void>
                 {
@@ -310,14 +336,19 @@ public class FavFragment extends Fragment {
         return v;
     }
 
-
+    private void setInitialDateTime() {
+        Dattime.setText(DateUtils.formatDateTime(getActivity(),
+                dateAndTime.getTimeInMillis(),
+                DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR
+                        | DateUtils.FORMAT_SHOW_TIME));
+    }
 
 
     TimePickerDialog.OnTimeSetListener t=new TimePickerDialog.OnTimeSetListener() {
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
             dateAndTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
             dateAndTime.set(Calendar.MINUTE, minute);
-            //setInitialDateTime();
+            setInitialDateTime();
         }
     };
 
@@ -328,7 +359,7 @@ public class FavFragment extends Fragment {
             dateAndTime.set(Calendar.YEAR, year);
             dateAndTime.set(Calendar.MONTH, monthOfYear);
             dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-           // setInitialDateTime();
+            setInitialDateTime();
         }
     };
 }

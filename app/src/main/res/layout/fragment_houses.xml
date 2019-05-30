@@ -84,10 +84,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:layout_weight="1"
+                    android:background="@android:color/holo_green_light"
+                    android:drawableStart="@android:drawable/stat_sys_phone_call"
                     android:gravity="center"
                     android:paddingLeft="20dp"
-                    android:background="@android:color/holo_green_light"
-                    android:drawableStart="@android:drawable/stat_sys_phone_call" />
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </LinearLayout>
@@ -97,7 +99,9 @@
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:background="@color/colorPrimary"
-            android:text="Добавить в избранное" />
+            android:text="Добавить в избранное"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView13"

@@ -50,8 +50,6 @@ public class SuperActivity extends AppCompatActivity {
     private boolean Find;
     private boolean Sear;
     private ArrayList<House> houses;
-    private ArrayList<House> housess;
-    private Context context;
     private SharedPreferences mSettings;
     public static final String APP_PREFERENCES = "mysettings";
     public static final String APP_PREFERENCES_MAIN = "Main";
@@ -67,11 +65,7 @@ public class SuperActivity extends AppCompatActivity {
             FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    Bundle mArg = new Bundle();
-                    mArg.putSerializable("houses", housess);
-                    HomeFragment mFrg = new HomeFragment();
-                    mFrg.setArguments(mArg);
-                    fragmentTransaction.replace(R.id.container, mFrg);
+                    fragmentTransaction.replace(R.id.container, new HomeFragment());
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
                     Map = true;
@@ -115,23 +109,6 @@ public class SuperActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_super);
-
-        Retrofit retrofitt=new Retrofit.Builder().baseUrl(APIUrl.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
-        APIService servicee=retrofitt.create(APIService.class);
-        housess=new ArrayList<>();
-        Call<HouseList> calll=servicee.getUsers();
-        calll.enqueue(new Callback<HouseList>() {
-            @Override
-            public void onResponse(Call<HouseList> call, Response<HouseList> response) {
-                housess=response.body().getHouses();
-            }
-
-            @Override
-            public void onFailure(Call<HouseList> call, Throwable t) {
-
-            }
-        });
-
         BottomNavigationView navView = findViewById(R.id.navigation);
         fragmentManager=getSupportFragmentManager();
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
