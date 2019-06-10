@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.example.dp.API.HouseDao;
 import com.example.dp.App.App;
@@ -31,6 +32,7 @@ public class FavoriteFragment extends Fragment {
     private AppDatabase db;
     private RecyclerView rv;
     private FavoriteAdapter adapter;
+    private ProgressBar progressBar;
     public FavoriteFragment() {
         // Required empty public constructor
     }
@@ -47,6 +49,8 @@ public class FavoriteFragment extends Fragment {
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_home, container, false);
         rv=(RecyclerView)v.findViewById(R.id.rv);
+        progressBar=v.findViewById(R.id.loading_spinner);
+        progressBar.setVisibility(ProgressBar.GONE);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         getHouses();
         return v;

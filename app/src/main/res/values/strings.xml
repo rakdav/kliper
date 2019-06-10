@@ -46,5 +46,6 @@
     <string name="title_notifications">Notifications</string>
     <string name="tipo">Введите тип недвижимости</string>
     <string name="title_activity_maps2">Map</string>
+    <string name="splash_text">Клипер-недвижимость</string>
 
 </resources>

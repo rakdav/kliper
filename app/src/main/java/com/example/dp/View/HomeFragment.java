@@ -9,6 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
 import com.example.dp.API.APIService;
 import com.example.dp.API.APIUrl;
 import com.example.dp.Controller.HouseAdapter;
@@ -29,7 +32,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView rv;
     private HouseAdapter adapter;
     private ArrayList<House> houses;
-
+    private ProgressBar progressBar;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -41,22 +44,26 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_home, container, false);
         rv=v.findViewById(R.id.rv);
+        progressBar=v.findViewById(R.id.loading_spinner);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         Retrofit retrofit=new Retrofit.Builder().baseUrl(APIUrl.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         APIService service=retrofit.create(APIService.class);
         houses=new ArrayList<>();
+        progressBar.setVisibility(ProgressBar.VISIBLE);
         Call<HouseList> call=service.getUsers();
         call.enqueue(new Callback<HouseList>() {
             @Override
             public void onResponse(Call<HouseList> call, Response<HouseList> response) {
                 houses=response.body().getHouses();
+                progressBar.setVisibility(ProgressBar.GONE);
                 Update(houses);
             }
 
             @Override
             public void onFailure(Call<HouseList> call, Throwable t) {
-
+                progressBar.setVisibility(ProgressBar.GONE);
+                Toast.makeText(getActivity(),t.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
         return v;
@@ -183,7 +190,7 @@ public class HomeFragment extends Fragment {
                                }
                                if (town.contains("Светлогорск")){
                                    for (House h : t2) {
-                                       if ( h.getCity_title()!= null && h.getCity_title().equals("Cветлогорск")) t3.add(h);
+                                       if ( h.getCity_title()!= null && h.getCity_title().equals("Светлогорск")) t3.add(h);
                                    }
 
                                }
@@ -246,6 +253,7 @@ public class HomeFragment extends Fragment {
 
     private void Update(ArrayList<House> h)
     {
+
         adapter=null;
         adapter=new HouseAdapter(h,getActivity());
         adapter.notifyDataSetChanged();
