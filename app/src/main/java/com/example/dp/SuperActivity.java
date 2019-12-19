@@ -80,7 +80,7 @@ public class SuperActivity extends AppCompatActivity {
                     fragmentTransaction.replace(R.id.container,new InfoFragment());
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
-                    toolbar.setTitle("Клипер");
+                    toolbar.setTitle("Клипер недвижимость калининград");
                     Map=true;
                     Find=true;
                     Sear=true;
@@ -118,7 +118,7 @@ public class SuperActivity extends AppCompatActivity {
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        toolbar.setTitle("Клипер");
+        toolbar.setTitle("Клипер недвижимость калининград");
         Map=true;
         Find=true;
         Sear=true;

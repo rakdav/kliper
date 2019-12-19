@@ -42,31 +42,31 @@ public class InfoFragment extends Fragment implements OnMapReadyCallback {
     private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
 
     public InfoFragment() {
-        // Required empty public constructor
+       //Required empty public constructor
     }
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.info_glav, container, false);
-        rv=v.findViewById(R.id.rvagents);
-        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        Retrofit retrofit=new Retrofit.Builder().baseUrl(APIUrl.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
-        APIService service=retrofit.create(APIService.class);
-        agents=new ArrayList<>();
-        Call<AgentsList> call=service.getAgents();
-        call.enqueue(new Callback<AgentsList>() {
-            @Override
-            public void onResponse(Call<AgentsList> call, Response<AgentsList> response) {
-                agents=response.body().getResults();
-                Update(agents);
-            }
-
-            @Override
-            public void onFailure(Call<AgentsList> call, Throwable t) {
-
-            }
-        });
+//        rv=v.findViewById(R.id.rvagents);
+//        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        Retrofit retrofit=new Retrofit.Builder().baseUrl(APIUrl.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+//        APIService service=retrofit.create(APIService.class);
+//        agents=new ArrayList<>();
+//        Call<AgentsList> call=service.getAgents();
+//        call.enqueue(new Callback<AgentsList>() {
+//            @Override
+//            public void onResponse(Call<AgentsList> call, Response<AgentsList> response) {
+//                agents=response.body().getResults();
+//                Update(agents);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<AgentsList> call, Throwable t) {
+//
+//            }
+//        });
 
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
@@ -140,7 +140,7 @@ public class InfoFragment extends Fragment implements OnMapReadyCallback {
         gmap.setMinZoomPreference(12);
         LatLng ny = new LatLng(54.7113506, 20.5061358);
         MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(ny).title("Клипер");
+        markerOptions.position(ny).title("Недвижимость Калининграда АН Клипер");
         gmap.addMarker(markerOptions);
         gmap.moveCamera(CameraUpdateFactory.newLatLng(ny));
     }

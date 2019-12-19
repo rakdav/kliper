@@ -19,7 +19,7 @@ public class House implements Serializable {
     private String ground_area;
     private boolean hot;
     @PrimaryKey
-    private int id;
+    public int id;
     private String kitchen_area;
     private String title;
     private String latitude;

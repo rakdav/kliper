@@ -1,9 +1,11 @@
 package com.example.dp.View;
 
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -43,6 +45,7 @@ import com.example.dp.Model.Home;
 import com.example.dp.Model.House;
 import com.example.dp.Model.HouseLab;
 import com.example.dp.Model.PictureList;
+import com.example.dp.MyReceiver;
 import com.example.dp.R;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -241,20 +244,6 @@ public class FavFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                NotificationCompat.Builder builder =
-                        new NotificationCompat.Builder(getActivity())
-                                .setSmallIcon(R.mipmap.ic_launcher)
-                                .setContentTitle("Title")
-                                .setContentText("Notification text");
-
-                Notification notification = builder.build();
-
-                NotificationManager notificationManager =
-                        (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
-                notificationManager.notify(1, notification);
-
-
-
                 house.setComment(comment.getText().toString());
                 class UpdateHouse extends AsyncTask<Void,Void,Void>
                 {
@@ -362,4 +351,5 @@ public class FavFragment extends Fragment {
             setInitialDateTime();
         }
     };
+
 }

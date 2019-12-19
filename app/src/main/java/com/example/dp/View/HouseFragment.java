@@ -180,7 +180,6 @@ public class HouseFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getContext(),MapsActivity.class);
-
                 intent.putExtra("Lat", Lat.getText().toString());
                 intent.putExtra("Lng", Lng.getText().toString());
                 intent.putExtra("title",TitleField.getText().toString());
